@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff8ee">
+<meta name="description" content="A simple multilingual guide to heat illness prevention and what to do in Japan's summer.">
+<title>Heat Safe Japan — A 30-second guide</title>
+<style>
+:root{--ink:#172b3a;--muted:#5a6b75;--paper:#fffaf3;--white:#fff;--orange:#f26a3d;--orange-dark:#b83d1d;--yellow:#ffd46a;--teal:#087e83;--teal-light:#e4f6f2;--line:#eadfd2;--shadow:0 18px 50px rgba(39,53,61,.09);--radius:24px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{color:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible{outline:3px solid #087e83;outline-offset:4px}
+.topbar{max-width:1160px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:.94rem;font-weight:900;letter-spacing:.045em;white-space:nowrap}
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:12px;background:var(--yellow);font-size:1.2rem}
+.brand-accent{color:var(--orange-dark)}
+.language-switch{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.language-switch button{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:8px 12px;font:inherit;font-size:.85rem;font-weight:750;cursor:pointer}
+.language-switch button[aria-pressed="true"]{background:var(--ink);color:#fff}
+main{overflow:hidden}
+.hero{max-width:1160px;margin:12px auto 0;padding:40px 24px 70px;display:grid;grid-template-columns:1.08fr .92fr;gap:42px;align-items:center}
+.eyebrow{margin:0 0 14px;color:var(--orange-dark);font-size:.77rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(2.8rem,6vw,5.3rem);line-height:.99;letter-spacing:-.065em;margin-bottom:22px;max-width:680px}
+h1 span{display:block}
+h1 span:last-child{color:var(--orange-dark)}
+.hero-lede{font-size:1.12rem;line-height:1.7;color:var(--muted);max-width:540px;margin-bottom:26px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:850;border:2px solid transparent;min-height:50px}
+.button-primary{background:var(--orange);color:#fff;box-shadow:0 8px 0 #d94e28}
+.button-primary:hover{background:#dc532c;transform:translateY(-1px)}
+.button-quiet{border-color:var(--line);background:#fff}
+.button-quiet:hover{border-color:var(--teal)}
+.hero-note{display:flex;align-items:center;gap:9px;margin-top:26px;color:var(--muted);font-size:.9rem}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 5px var(--teal-light)}
+.hero-art{min-height:390px;position:relative;display:grid;place-items:center}
+.art-backdrop{position:absolute;inset:7% 4% 4%;border-radius:48% 52% 43% 57%/48% 44% 56% 52%;background:#ffe8b1;transform:rotate(-7deg)}
+.sun-disc{position:absolute;right:6%;top:3%;width:108px;height:108px;display:grid;place-items:center;border-radius:50%;background:var(--yellow);font-size:3.4rem;box-shadow:0 0 0 14px rgba(255,212,106,.22)}
+.art-cloud{position:absolute;left:3%;top:19%;font-size:2.3rem;opacity:.8}
+.main-illustration{position:relative;width:min(330px,78%);padding:26px 24px 24px;background:#fff;border:1px solid rgba(23,43,58,.06);border-radius:30px;box-shadow:var(--shadow);transform:rotate(3deg)}
+.illustration-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:.76rem;font-weight:850;letter-spacing:.08em}
+.mini-badge{padding:6px 9px;border-radius:999px;background:var(--teal-light);color:var(--teal);letter-spacing:0}
+.big-water{display:flex;justify-content:center;align-items:center;gap:15px;padding:24px 0 17px}
+.water-bottle{position:relative;width:72px;height:142px;border:5px solid #77cbd1;border-radius:17px 17px 22px 22px;background:linear-gradient(180deg,#e6fbff 0 32%,#8cdee5 32% 100%);box-shadow:inset -9px 0 0 rgba(8,126,131,.09)}
+.water-bottle:before{content:"";position:absolute;width:29px;height:15px;left:16px;top:-18px;border:4px solid #77cbd1;border-bottom:0;border-radius:6px 6px 0 0;background:#fff}
+.water-bottle:after{content:"H₂O";position:absolute;top:62px;left:8px;color:#087e83;font-size:1rem;font-weight:950;letter-spacing:-.05em}
+.water-spark{font-size:2.1rem;color:var(--teal)}
+.illustration-title{font-size:1.55rem;line-height:1.12;letter-spacing:-.04em;margin:0 0 8px}
+.illustration-caption{color:var(--muted);font-size:.88rem;margin:0}
+.art-sticker{position:absolute;bottom:2%;left:0;background:var(--teal);color:#fff;padding:13px 17px;border-radius:17px;font-size:.9rem;font-weight:850;box-shadow:0 10px 25px rgba(8,126,131,.2);transform:rotate(-5deg)}
+.section{max-width:1160px;margin:0 auto;padding:62px 24px}
+.section-heading{max-width:720px;margin-bottom:28px}
+.section-heading h2,.quick-copy h2,.emergency h2,.prevention h2{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.05em;line-height:1.08;margin-bottom:13px}
+.section-heading p:not(.eyebrow),.quick-copy>p:not(.eyebrow){color:var(--muted);font-size:1.02rem;max-width:640px;margin-bottom:0}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step-card{position:relative;min-height:290px;padding:23px 21px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 6px 18px rgba(39,53,61,.025)}
+.step-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:18px;background:#fff0d7;font-size:1.9rem;margin-bottom:18px}
+.step-card:nth-child(2) .step-icon{background:#e4f6f2}
+.step-card:nth-child(3) .step-icon{background:#e3f4ff}
+.step-card:nth-child(4) .step-icon{background:#ffe6df}
+.step-number{position:absolute;right:20px;top:25px;color:#b8bfc2;font-size:.82rem;font-weight:900;letter-spacing:.1em}
+.step-card h3{font-size:1.24rem;margin-bottom:9px;letter-spacing:-.02em}
+.step-card p{font-size:.94rem;color:var(--muted);margin-bottom:17px}
+.step-tip{display:block;padding-top:13px;border-top:1px solid #f0e8df;font-size:.82rem;font-weight:750;color:var(--teal)}
+.quick-check{max-width:1112px;margin:20px auto 35px;padding:38px 40px;display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:center;border-radius:30px;background:var(--teal-light)}
+.quick-copy .eyebrow{color:var(--teal)}
+.symptoms{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.symptom{display:flex;gap:10px;align-items:flex-start;padding:14px 15px;border-radius:15px;background:rgba(255,255,255,.83);font-size:.92rem;font-weight:750}
+.symptom-mark{flex:0 0 24px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:#c8eee5;color:var(--teal);font-size:.8rem;font-weight:950}
+.emergency{background:#fff0e8;padding:68px 24px 74px}
+.emergency-inner{max-width:1112px;margin:auto}
+.emergency-heading{display:grid;grid-template-columns:1fr .8fr;gap:30px;align-items:end;margin-bottom:30px}
+.alert-label{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;margin-bottom:14px;border-radius:999px;background:#ffe0d4;color:#9d3018;font-size:.78rem;font-weight:900;letter-spacing:.04em}
+.alert-mark{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--orange-dark);color:white;font-size:.8rem}
+.emergency-heading h2{margin-bottom:12px}
+.emergency-heading>p{color:var(--muted);margin:0;max-width:420px}
+.emergency-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+.response-card,.call-card{border-radius:24px;background:#fff;padding:26px}
+.response-steps{display:grid;gap:17px}
+.response-step{display:grid;grid-template-columns:38px 1fr;gap:13px}
+.response-number{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:#ffeadf;color:var(--orange-dark);font-weight:950}
+.response-step h3{font-size:1.03rem;margin:2px 0 5px}
+.response-step p{color:var(--muted);font-size:.92rem;margin:0}
+.call-card{background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.call-eyebrow{color:#a5e8db;font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+.call-number{font-size:clamp(4.4rem,8vw,6.6rem);line-height:1;font-weight:950;letter-spacing:-.07em;margin:0 0 7px}
+.call-card p{color:#d5e0e4;margin-bottom:20px}
+.call-button{background:var(--yellow);color:var(--ink);width:100%;max-width:250px}
+.call-button:hover{background:#ffe29a}
+.call-footnote{font-size:.78rem!important;margin:15px 0 0!important;color:#d5e0e4!important}
+.phrase-box{margin-top:16px;padding:22px 25px;background:#fff;border:1px solid #f2d5c7;border-radius:22px;display:flex;gap:18px;align-items:center;justify-content:space-between}
+.phrase-box h3{font-size:1rem;margin:0 0 6px}
+.phrase-text{font-size:1.05rem;font-weight:850;margin:0}
+.phrase-translation{color:var(--muted);font-size:.86rem;margin:5px 0 0}
+.phrase-copy{flex:0 0 auto;border:1px solid var(--line);background:#fffaf3;border-radius:999px;padding:11px 14px;font:inherit;font-size:.85rem;font-weight:850;cursor:pointer}
+.phrase-copy:hover{border-color:var(--teal)}
+.danger-note{margin:16px 0 0;padding:14px 17px;border-radius:15px;background:#ffe0d4;color:#7d2816;font-size:.9rem;font-weight:750}
+.prevention{max-width:1160px;margin:auto;padding:68px 24px 76px}
+.prevention-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:start}
+.prevention h2{margin-bottom:14px}
+.prevention-intro{color:var(--muted)}
+.prevention-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prevention-list li{display:flex;gap:12px;align-items:flex-start;padding:17px;background:#fff;border:1px solid var(--line);border-radius:17px;font-weight:750;font-size:.94rem}
+.check-icon{flex:0 0 25px;width:25px;height:25px;display:grid;place-items:center;background:var(--teal-light);color:var(--teal);border-radius:50%;font-weight:950}
+footer{background:#f1e8dd;padding:25px 24px;color:var(--muted);font-size:.82rem}
+.footer-inner{max-width:1112px;margin:auto;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.footer-brand{font-weight:950;color:var(--ink);margin-bottom:5px}
+footer p{margin:0;max-width:650px}
+@media(max-width:900px){.hero{grid-template-columns:1fr 0.8fr;gap:16px}.hero-art{min-height:330px}.steps-grid{grid-template-columns:repeat(2,1fr)}.step-card{min-height:250px}.quick-check{margin-left:24px;margin-right:24px;padding:30px;grid-template-columns:1fr}.emergency-heading{grid-template-columns:1fr;gap:0}.emergency-heading>p{max-width:680px}.prevention-layout{grid-template-columns:1fr;gap:22px}}
+@media(max-width:620px){.topbar{padding:14px 16px;align-items:flex-start}.brand{font-size:.8rem;gap:6px}.brand-mark{width:30px;height:30px}.language-switch{gap:1px;padding:3px}.language-switch button{font-size:.77rem;padding:7px 8px}.hero{display:flex;flex-direction:column;align-items:stretch;padding:34px 20px 48px;margin-top:0;gap:5px}.hero h1{font-size:clamp(2.8rem,13vw,4.5rem)}.hero-lede{font-size:1rem}.hero-art{min-height:300px;margin-top:8px}.main-illustration{width:270px;padding:20px}.water-bottle{height:115px;width:62px}.water-bottle:after{top:49px;left:5px}.sun-disc{width:78px;height:78px;font-size:2.5rem}.art-sticker{left:2%;bottom:0}.section{padding:48px 20px}.section-heading h2,.quick-copy h2,.emergency h2,.prevention h2{font-size:2.25rem}.steps-grid{gap:10px}.step-card{padding:18px 15px;min-height:280px;border-radius:19px}.step-icon{width:48px;height:48px;font-size:1.6rem;border-radius:15px}.step-number{right:14px;top:20px}.step-card h3{font-size:1.1rem}.step-card p{font-size:.88rem}.step-tip{font-size:.78rem}.quick-check{margin:0 14px 24px;padding:25px 19px;border-radius:23px;gap:22px}.symptoms{grid-template-columns:1fr;gap:8px}.symptom{padding:12px}.emergency{padding:48px 16px 52px}.emergency-grid{grid-template-columns:1fr}.response-card,.call-card{padding:22px;border-radius:20px}.call-card{align-items:center;text-align:center}.call-button{max-width:none}.phrase-box{padding:18px;align-items:flex-start;flex-direction:column}.phrase-copy{width:100%}.prevention{padding:50px 20px}.prevention-list{grid-template-columns:1fr;gap:9px}.footer-inner{flex-direction:column;gap:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="Heat Safe Japan home"><span class="brand-mark" aria-hidden="true">☀</span><span>HEAT SAFE <span class="brand-accent">JAPAN</span></span></a>
+  <div class="language-switch" role="group" aria-label="Choose language">
+    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+  </div>
+</header>
+<main id="top">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow" data-i18n="eyebrow">A 30-SECOND SAFETY GUIDE</p>
+      <h1><span data-i18n="heroLine1">Hot day?</span><span data-i18n="heroLine2">Stay safe in Japan.</span></h1>
+      <p class="hero-lede" data-i18n="heroLede">Summer in Japan can be very hot and humid. Learn four simple actions to protect yourself and the people around you.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#steps"><span data-i18n="buttonSteps">Learn the 4 steps</span><span aria-hidden="true">↓</span></a>
+        <a class="button button-quiet" href="#emergency"><span aria-hidden="true">✚</span><span data-i18n="buttonHelp">Someone feels unwell?</span></a>
+      </div>
+      <div class="hero-note"><span class="dot" aria-hidden="true"></span><span data-i18n="heroNote">Easy to read. No app or sign-up needed.</span></div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-backdrop"></div><div class="sun-disc">☀</div><div class="art-cloud">☁</div>
+      <div class="main-illustration">
+        <div class="illustration-top"><span data-i18n="illustrationTag">SUMMER SMART</span><span class="mini-badge">30 sec</span></div>
+        <div class="big-water"><div class="water-bottle"></div><span class="water-spark">✦</span></div>
+        <h2 class="illustration-title" data-i18n="illustrationTitle">Pause. Sip. Cool down.</h2>
+        <p class="illustration-caption" data-i18n="illustrationCaption">A little care can make a big difference.</p>
+      </div>
+      <div class="art-sticker" data-i18n="artSticker">Your summer safety buddy</div>
+    </div>
+  </section>
+
+  <section class="section" id="steps">
+    <div class="section-heading">
+      <p class="eyebrow" data-i18n="stepsEyebrow">REMEMBER THESE 4 ACTIONS</p>
+      <h2 data-i18n="stepsTitle">Drink. Rest. Cool. Ask for help.</h2>
+      <p data-i18n="stepsIntro">If you start to feel unwell, stop what you are doing. Don't try to push through it.</p>
+    </div>
+    <div class="steps-grid">
+      <article class="step-card"><div class="step-icon" aria-hidden="true">💧</div><span class="step-number">01</span><h3 data-i18n="drinkTitle">DRINK</h3><p data-i18n="drinkText">Take frequent sips of water. If you sweat a lot, an electrolyte drink can help replace lost salts.</p><span class="step-tip" data-i18n="drinkTip">Find drinks at vending machines or convenience stores.</span></article>
+      <article class="step-card"><div class="step-icon" aria-hidden="true">⛱️</div><span class="step-number">02</span><h3 data-i18n="restTitle">REST</h3><p data-i18n="restText">Move into shade or an air-conditioned place. Take breaks before you feel exhausted.</p><span class="step-tip" data-i18n="restTip">A shop or station may offer a cooler indoor space.</span></article>
+      <article class="step-card"><div class="step-icon" aria-hidden="true">🧊</div><span class="step-number">03</span><h3 data-i18n="coolTitle">COOL</h3><p data-i18n="coolText">Cool your body with a wet towel or cold pack, especially around your neck, armpits and groin.</p><span class="step-tip" data-i18n="coolTip">Loosen extra clothing and use a fan if available.</span></article>
+      <article class="step-card"><div class="step-icon" aria-hidden="true">🆘</div><span class="step-number">04</span><h3 data-i18n="helpTitle">ASK FOR HELP</h3><p data-i18n="helpText">Tell a friend, staff member or passer-by as soon as you feel unwell.</p><span class="step-tip" data-i18n="helpTip">For an emergency in Japan, call 119.</span></article>
+    </div>
+  </section>
+
+  <section class="quick-check" aria-labelledby="symptoms-title">
+    <div class="quick-copy">
+      <p class="eyebrow" data-i18n="symptomsEyebrow">NOTICE THE SIGNS</p>
+      <h2 id="symptoms-title" data-i18n="symptomsTitle">Feeling off? Act early.</h2>
+      <p data-i18n="symptomsIntro">Heat illness can get worse quickly. Stop, move somewhere cool and ask for help if you notice symptoms.</p>
+    </div>
+    <div class="symptoms">
+      <div class="symptom"><span class="symptom-mark" aria-hidden="true">!</span><span data-i18n="symptom1">Dizziness or light-headedness</span></div>
+      <div class="symptom"><span class="symptom-mark" aria-hidden="true">!</span><span data-i18n="symptom2">Headache or nausea</span></div>
+      <div class="symptom"><span class="symptom-mark" aria-hidden="true">!</span><span data-i18n="symptom3">Unusual weakness or heavy sweating</span></div>
+      <div class="symptom"><span class="symptom-mark" aria-hidden="true">!</span><span data-i18n="symptom4">Muscle cramps or feeling faint</span></div>
+    </div>
+  </section>
+
+  <section class="emergency" id="emergency">
+    <div class="emergency-inner">
+      <div class="emergency-heading">
+        <div><div class="alert-label"><span class="alert-mark" aria-hidden="true">!</span><span data-i18n="emergencyLabel">NEED HELP NOW?</span></div><h2 data-i18n="emergencyTitle">Someone may have heat illness?</h2></div>
+        <p data-i18n="emergencyIntro">Act quickly and stay with them. If they seem seriously unwell, call an ambulance immediately.</p>
+      </div>
+      <div class="emergency-grid">
+        <div class="response-card">
+          <div class="response-steps">
+            <div class="response-step"><span class="response-number">1</span><div><h3 data-i18n="responseTitle1">Move to a cooler place</h3><p data-i18n="responseText1">Get them out of direct sun and into shade or an air-conditioned room.</p></div></div>
+            <div class="response-step"><span class="response-number">2</span><div><h3 data-i18n="responseTitle2">Cool the body</h3><p data-i18n="responseText2">Loosen clothing and cool the skin with cold wet towels or ice packs.</p></div></div>
+            <div class="response-step"><span class="response-number">3</span><div><h3 data-i18n="responseTitle3">Check if they can drink safely</h3><p data-i18n="responseText3">Only if fully awake and able to swallow, offer small sips of water or an electrolyte drink.</p></div></div>
+          </div>
+        </div>
+        <aside class="call-card">
+          <p class="call-eyebrow" data-i18n="callEyebrow">AMBULANCE IN JAPAN</p>
+          <div class="call-number">119</div>
+          <p data-i18n="callText">Call if they are confused, collapse, have seizures, are hard to wake, cannot drink, or seem seriously unwell.</p>
+          <a class="button call-button" href="tel:119"><span aria-hidden="true">☎</span><span data-i18n="callButton">Call 119</span></a>
+          <p class="call-footnote" data-i18n="callFootnote">If calling is difficult, ask someone nearby to call for you.</p>
+        </aside>
+      </div>
+      <div class="phrase-box">
+        <div><h3 data-i18n="phraseTitle">Show this message to someone nearby</h3><p class="phrase-text" id="emergency-phrase">I may have heat illness. Please call an ambulance.</p><p class="phrase-translation" data-i18n="phraseHint">You can show them this screen if you need help communicating.</p></div>
+        <button class="phrase-copy" id="copy-phrase" type="button" data-i18n="copyButton">Copy message</button>
+      </div>
+      <p class="danger-note" data-i18n="dangerNote">Do not give drinks to someone who is confused, unconscious, vomiting or unable to swallow. Do not leave them alone. Call 119 if their condition is severe or worsening.</p>
+    </div>
+  </section>
+
+  <section class="prevention">
+    <div class="prevention-layout">
+      <div><p class="eyebrow" data-i18n="preventionEyebrow">BEFORE YOU HEAD OUT</p><h2 data-i18n="preventionTitle">Make room for cool-down breaks.</h2><p class="prevention-intro" data-i18n="preventionIntro">A few small habits can help you enjoy your trip more safely.</p></div>
+      <ul class="prevention-list">
+        <li><span class="check-icon" aria-hidden="true">✓</span><span data-i18n="prevention1">Check the weather forecast and heat alerts.</span></li>
+        <li><span class="check-icon" aria-hidden="true">✓</span><span data-i18n="prevention2">Carry water and drink regularly, not only when thirsty.</span></li>
+        <li><span class="check-icon" aria-hidden="true">✓</span><span data-i18n="prevention3">Take breaks in a cool indoor place.</span></li>
+        <li><span class="check-icon" aria-hidden="true">✓</span><span data-i18n="prevention4">Avoid strenuous activity during the hottest part of the day.</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<footer><div class="footer-inner"><div><div class="footer-brand">☀ HEAT SAFE JAPAN</div><p data-i18n="footerTagline">A simple summer safety guide for visitors to Japan.</p></div><p data-i18n="footerNote">General information only; this page cannot diagnose illness. When in doubt or if symptoms are severe, seek medical help. In an emergency in Japan, call 119.</p></div></footer>
+<script>
+const translations = {
+en: {
+eyebrow:"A 30-SECOND SAFETY GUIDE",heroLine1:"Hot day?",heroLine2:"Stay safe in Japan.",heroLede:"Summer in Japan can be very hot and humid. Learn four simple actions to protect yourself and the people around you.",buttonSteps:"Learn the 4 steps",buttonHelp:"Someone feels unwell?",heroNote:"Easy to read. No app or sign-up needed.",illustrationTag:"SUMMER SMART",illustrationTitle:"Pause. Sip. Cool down.",illustrationCaption:"A little care can make a big difference.",artSticker:"Your summer safety buddy",
+stepsEyebrow:"REMEMBER THESE 4 ACTIONS",stepsTitle:"Drink. Rest. Cool. Ask for help.",stepsIntro:"If you start to feel unwell, stop what you are doing. Don't try to push through it.",drinkTitle:"DRINK",drinkText:"Take frequent sips of water. If you sweat a lot, an electrolyte drink can help replace lost salts.",drinkTip:"Find drinks at vending machines or convenience stores.",restTitle:"REST",restText:"Move into shade or an air-conditioned place. Take breaks before you feel exhausted.",restTip:"A shop or station may offer a cooler indoor space.",coolTitle:"COOL",coolText:"Cool your body with a wet towel or cold pack, especially around your neck, armpits and groin.",coolTip:"Loosen extra clothing and use a fan if available.",helpTitle:"ASK FOR HELP",helpText:"Tell a friend, staff member or passer-by as soon as you feel unwell.",helpTip:"For an emergency in Japan, call 119.",
+symptomsEyebrow:"NOTICE THE SIGNS",symptomsTitle:"Feeling off? Act early.",symptomsIntro:"Heat illness can get worse quickly. Stop, move somewhere cool and ask for help if you notice symptoms.",symptom1:"Dizziness or light-headedness",symptom2:"Headache or nausea",symptom3:"Unusual weakness or heavy sweating",symptom4:"Muscle cramps or feeling faint",
+emergencyLabel:"NEED HELP NOW?",emergencyTitle:"Someone may have heat illness?",emergencyIntro:"Act quickly and stay with them. If they seem seriously unwell, call an ambulance immediately.",responseTitle1:"Move to a cooler place",responseText1:"Get them out of direct sun and into shade or an air-conditioned room.",responseTitle2:"Cool the body",responseText2:"Loosen clothing and cool the skin with cold wet towels or ice packs.",responseTitle3:"Check if they can drink safely",responseText3:"Only if fully awake and able to swallow, offer small sips of water or an electrolyte drink.",callEyebrow:"AMBULANCE IN JAPAN",callText:"Call if they are confused, collapse, have seizures, are hard to wake, cannot drink, or seem seriously unwell.",callButton:"Call 119",callFootnote:"If calling is difficult, ask someone nearby to call for you.",phraseTitle:"Show this message to someone nearby",phraseHint:"You can show them this screen if you need help communicating.",copyButton:"Copy message",dangerNote:"Do not give drinks to someone who is confused, unconscious, vomiting or unable to swallow. Do not leave them alone. Call 119 if their condition is severe or worsening.",
+preventionEyebrow:"BEFORE YOU HEAD OUT",preventionTitle:"Make room for cool-down breaks.",preventionIntro:"A few small habits can help you enjoy your trip more safely.",prevention1:"Check the weather forecast and heat alerts.",prevention2:"Carry water and drink regularly, not only when thirsty.",prevention3:"Take breaks in a cool indoor place.",prevention4:"Avoid strenuous activity during the hottest part of the day.",footerTagline:"A simple summer safety guide for visitors to Japan.",footerNote:"General information only; this page cannot diagnose illness. When in doubt or if symptoms are severe, seek medical help. In an emergency in Japan, call 119.",phrase:"I may have heat illness. Please call an ambulance.",copied:"Copied"
+},
+ja: {
+eyebrow:"30秒でわかる熱中症対策",heroLine1:"暑い日こそ、",heroLine2:"安全に日本を楽しもう。",heroLede:"日本の夏は、高温多湿になることがあります。自分と周りの人を守るための4つの行動を覚えましょう。",buttonSteps:"4つの行動を見る",buttonHelp:"具合が悪い人がいる？",heroNote:"アプリのインストールも登録も不要です。",illustrationTag:"夏を安全に楽しもう",illustrationTitle:"立ち止まる。飲む。冷やす。",illustrationCaption:"少しの気配りが、大きな違いにつながります。",artSticker:"夏のお守りガイド",
+stepsEyebrow:"覚えておきたい4つの行動",stepsTitle:"飲む・休む・冷やす・助けを求める",stepsIntro:"具合が悪くなったら、無理をせず、すぐに行動を止めましょう。",drinkTitle:"飲む",drinkText:"水分をこまめに取りましょう。大量に汗をかいたときは、電解質を含む飲料も選択肢です。",drinkTip:"自動販売機やコンビニで飲み物を買えます。",restTitle:"休む",restText:"日陰や冷房の効いた場所に移動しましょう。疲れ切る前に休憩を取ってください。",restTip:"店舗や駅など、涼しい屋内を探しましょう。",coolTitle:"冷やす",coolText:"濡れたタオルや保冷剤などで、特に首・脇の下・足の付け根を冷やしましょう。",coolTip:"衣服をゆるめ、使える場合は扇風機も利用しましょう。",helpTitle:"助けを求める",helpText:"具合が悪くなったら、友人や施設のスタッフ、近くの人にすぐ伝えましょう。",helpTip:"日本で救急車が必要なときは119番です。",
+symptomsEyebrow:"体調の変化に注意",symptomsTitle:"いつもと違う？早めに行動を。",symptomsIntro:"熱中症は急に悪化することがあります。症状に気づいたら、活動を止めて涼しい場所へ移動し、助けを求めましょう。",symptom1:"めまい、立ちくらみ",symptom2:"頭痛、吐き気",symptom3:"いつもと違うだるさ、大量の汗",symptom4:"筋肉のけいれん、気が遠くなる感じ",
+emergencyLabel:"今すぐ助けが必要？",emergencyTitle:"熱中症かもしれない人がいたら",emergencyIntro:"すぐに対応し、そばを離れないでください。重い症状がある場合は、ただちに救急車を呼びましょう。",responseTitle1:"涼しい場所へ移動",responseText1:"直射日光を避け、日陰や冷房の効いた室内へ移動させます。",responseTitle2:"体を冷やす",responseText2:"衣服をゆるめ、冷たい濡れタオルや保冷剤などで体を冷やします。",responseTitle3:"安全に飲める状態か確認",responseText3:"意識がはっきりしていて、飲み込める場合に限り、水や電解質を含む飲料を少しずつ飲ませます。",callEyebrow:"日本の救急車",callText:"意識がおかしい、倒れた、けいれんがある、呼びかけに反応しにくい、飲めない、または重い症状がある場合は119番へ。",callButton:"119番に電話",callFootnote:"自分で電話できないときは、近くの人に通報を頼んでください。",phraseTitle:"近くの人にこの画面を見せてください",phraseHint:"言葉で説明するのが難しいときは、この画面を見せて助けを求めましょう。",copyButton:"メッセージをコピー",dangerNote:"意識がはっきりしない、意識がない、吐いている、飲み込めない人に飲み物を与えないでください。ひとりにせず、症状が重い・悪化している場合は119番へ。",
+preventionEyebrow:"出かける前に",preventionTitle:"涼しく休む時間も予定に入れよう。",preventionIntro:"少しの工夫で、旅行をより安全に楽しみやすくなります。",prevention1:"天気予報や熱中症警戒情報を確認する。",prevention2:"水分を持ち歩き、喉が渇く前からこまめに飲む。",prevention3:"涼しい屋内で休憩する。",prevention4:"一日の中で特に暑い時間帯の激しい運動を避ける。",footerTagline:"訪日旅行者のための、夏の安全ガイド。",footerNote:"一般的な情報であり、診断を行うものではありません。迷ったときや症状が重いときは医療機関に相談してください。日本で緊急時は119番です。",phrase:"熱中症かもしれません。救急車を呼んでください。",copied:"コピーしました"
+},
+ko: {
+eyebrow:"30초 열사병 예방 가이드",heroLine1:"더운 날에도",heroLine2:"일본을 안전하게 즐겨요.",heroLede:"일본의 여름은 매우 덥고 습할 수 있어요. 나와 주변 사람을 지키는 네 가지 행동을 기억하세요.",buttonSteps:"4가지 행동 알아보기",buttonHelp:"몸이 안 좋은 사람이 있나요?",heroNote:"앱 설치나 회원가입이 필요 없어요.",illustrationTag:"안전한 여름 보내기",illustrationTitle:"멈추고, 마시고, 식히세요.",illustrationCaption:"작은 주의가 큰 차이를 만들어요.",artSticker:"여름 안전 도우미",
+stepsEyebrow:"기억해야 할 4가지 행동",stepsTitle:"마시기 · 쉬기 · 식히기 · 도움 요청하기",stepsIntro:"몸이 좋지 않다고 느껴지면 하던 일을 멈추고 무리하지 마세요.",drinkTitle:"마시기",drinkText:"물을 조금씩 자주 마시세요. 땀을 많이 흘렸다면 전해질 음료가 도움이 될 수 있어요.",drinkTip:"자판기나 편의점에서 음료를 살 수 있어요.",restTitle:"쉬기",restText:"그늘이나 에어컨이 있는 장소로 이동하세요. 지치기 전에 휴식을 취하세요.",restTip:"상점이나 역 등 시원한 실내를 찾아보세요.",coolTitle:"식히기",coolText:"젖은 수건이나 냉찜질 팩으로 특히 목, 겨드랑이, 사타구니를 식히세요.",coolTip:"옷을 느슨하게 하고 가능하면 선풍기를 사용하세요.",helpTitle:"도움 요청하기",helpText:"몸이 좋지 않으면 친구, 직원 또는 주변 사람에게 바로 알리세요.",helpTip:"일본에서 응급차가 필요하면 119에 전화하세요.",
+symptomsEyebrow:"증상에 주의하세요",symptomsTitle:"평소와 다르다면 빨리 대처하세요.",symptomsIntro:"열사병은 빠르게 악화될 수 있어요. 증상이 나타나면 활동을 멈추고 시원한 곳으로 이동해 도움을 요청하세요.",symptom1:"어지러움 또는 현기증",symptom2:"두통 또는 메스꺼움",symptom3:"평소와 다른 무력감 또는 심한 발한",symptom4:"근육 경련 또는 쓰러질 것 같은 느낌",
+emergencyLabel:"지금 도움이 필요하세요?",emergencyTitle:"열사병이 의심되는 사람이 있다면",emergencyIntro:"신속하게 대처하고 곁을 지켜주세요. 상태가 심각해 보이면 즉시 구급차를 부르세요.",responseTitle1:"시원한 곳으로 이동",responseText1:"직사광선을 피하고 그늘이나 에어컨이 있는 실내로 이동시키세요.",responseTitle2:"몸 식히기",responseText2:"옷을 느슨하게 하고 차가운 젖은 수건이나 냉찜질 팩으로 몸을 식히세요.",responseTitle3:"안전하게 마실 수 있는지 확인",responseText3:"의식이 또렷하고 삼킬 수 있을 때만 물이나 전해질 음료를 조금씩 마시게 하세요.",callEyebrow:"일본의 구급차",callText:"의식이 혼란스럽거나 쓰러짐, 경련, 깨우기 어려움, 물을 마시지 못하는 증상 또는 심각한 상태가 있으면 119에 전화하세요.",callButton:"119 전화하기",callFootnote:"직접 전화하기 어렵다면 주변 사람에게 대신 신고해 달라고 하세요.",phraseTitle:"주변 사람에게 이 화면을 보여주세요",phraseHint:"말로 설명하기 어렵다면 이 화면을 보여주고 도움을 요청하세요.",copyButton:"메시지 복사",dangerNote:"의식이 혼란스럽거나 없고, 구토하거나 삼키기 어려운 사람에게 음료를 주지 마세요. 혼자 두지 마세요. 상태가 심각하거나 악화되면 119에 전화하세요.",
+preventionEyebrow:"외출하기 전에",preventionTitle:"시원하게 쉴 시간도 계획에 넣으세요.",preventionIntro:"몇 가지 작은 습관으로 여행을 더 안전하게 즐길 수 있어요.",prevention1:"일기예보와 폭염 경보를 확인하세요.",prevention2:"물을 가지고 다니며 목이 마르기 전에도 자주 마시세요.",prevention3:"시원한 실내에서 휴식을 취하세요.",prevention4:"하루 중 가장 더운 시간대에는 격렬한 활동을 피하세요.",footerTagline:"일본을 방문하는 여행자를 위한 여름 안전 가이드.",footerNote:"일반적인 정보이며 질병을 진단하지 않습니다. 확신이 없거나 증상이 심하면 의료 도움을 받으세요. 일본에서 응급 상황은 119입니다.",phrase:"열사병일 수 있어요. 구급차를 불러 주세요.",copied:"복사했어요"
+}
+};
+let currentLang = "en";
+function setLanguage(lang) {
+  if (!translations[lang]) return;
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(function (node) {
+    const key = node.getAttribute("data-i18n");
+    if (translations[lang][key]) node.textContent = translations[lang][key];
+  });
+  document.querySelectorAll("[data-lang]").forEach(function (button) {
+    button.setAttribute("aria-pressed", button.getAttribute("data-lang") === lang ? "true" : "false");
+  });
+  document.getElementById("emergency-phrase").textContent = translations[lang].phrase;
+  document.getElementById("copy-phrase").textContent = translations[lang].copyButton;
+  document.title = lang === "ja" ? "Heat Safe Japan — 熱中症対策ガイド" : lang === "ko" ? "Heat Safe Japan — 열사병 예방 가이드" : "Heat Safe Japan — A 30-second guide";
+}
+document.querySelectorAll("[data-lang]").forEach(function (button) {
+  button.addEventListener("click", function () { setLanguage(button.getAttribute("data-lang")); });
+});
+document.getElementById("copy-phrase").addEventListener("click", async function () {
+  const button = this;
+  const text = translations[currentLang].phrase;
+  try {
+    await navigator.clipboard.writeText(text);
+    button.textContent = translations[currentLang].copied;
+    window.setTimeout(function () { button.textContent = translations[currentLang].copyButton; }, 1800);
+  } catch (error) {
+    const field = document.createElement("textarea");
+    field.value = text;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    document.body.appendChild(field);
+    field.select();
+    try { document.execCommand("copy"); button.textContent = translations[currentLang].copied; }
+    catch (ignored) { button.textContent = text; }
+    document.body.removeChild(field);
+    window.setTimeout(function () { button.textContent = translations[currentLang].copyButton; }, 1800);
+  }
+});
+setLanguage("en");
+</script>
+</body>
+</html>
