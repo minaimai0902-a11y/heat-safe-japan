@@ -173,6 +173,34 @@ label.switch{display:flex;align-items:center;gap:7px;font-weight:800;font-size:1
 .danger-info .emergency-call{margin-top:10px}
 .cautious-info{background:#fffaf0;border-color:#f0e2b7;color:#68592b}.cautious-info p{color:#68592b;margin:5px 0 0;font-size:12px;line-height:1.7}
 button.call-link,button.emergency-call,button.emergency-call-link{border:0;cursor:pointer;font-family:inherit}
+
+/* The staff-only presentation is deliberately separate from the child's game UI. */
+body.staff-mode{overflow:hidden}
+.staff-view{position:fixed;inset:0;z-index:140;margin:0;padding:18px 18px 42px;background:#fff;border:none;border-radius:0;box-shadow:none;overflow-y:auto;overscroll-behavior:contain;color:#18343e;-webkit-overflow-scrolling:touch}
+.staff-sheet{width:100%;max-width:610px;margin:0 auto;padding:0 0 18px}
+.staff-head{background:#e6f7fb;border:2px solid #9fd8e5;border-radius:18px;padding:22px 19px;margin:0 0 18px}
+.staff-kicker{color:#186b84;font-size:16px;line-height:1.5;letter-spacing:0;font-weight:900}
+.staff-head h2{color:#143440;font-size:clamp(34px,8.6vw,47px);line-height:1.2;margin:10px 0 14px;font-weight:950;letter-spacing:.01em}
+.staff-head p{font-size:clamp(20px,5vw,25px);font-weight:850;line-height:1.55;color:#244653;margin:0}
+.staff-language{border:none;border-radius:0;margin:0 0 18px;padding:0}
+.staff-language p{font-size:clamp(18px,4.7vw,22px);line-height:1.55;color:#18343e;margin:0 0 12px;font-weight:650}
+.staff-language strong{font-weight:950}
+.staff-view .staff-section-title,.staff-view .staff-other h3{color:#173946;font-size:clamp(20px,5.4vw,25px);line-height:1.4;margin:23px 0 11px}
+.staff-symptoms{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:8px}
+.staff-symptoms li{position:relative;font-size:clamp(20px,5.3vw,25px);line-height:1.55;font-weight:950;background:#f1f9fb;border:1px solid #b7dce7;padding:12px 16px 12px 45px;border-radius:13px;overflow-wrap:anywhere}
+.staff-symptoms li::before{content:'●';position:absolute;left:18px;top:16px;color:#1b809e;font-size:15px}
+.staff-meta{margin:18px 0;background:#f5fafb;padding:17px;border-radius:16px;gap:12px}
+.staff-meta div{font-size:clamp(16px,4.1vw,20px);line-height:1.4;align-items:flex-start;flex-wrap:wrap}
+.staff-meta b{color:#355862;font-weight:900}
+.staff-meta span{font-weight:900;color:#193844}
+.staff-urgent{font-size:clamp(19px,4.5vw,23px);line-height:1.65;padding:17px;border-width:2px;border-radius:16px;color:#7e201b}
+.staff-other{padding:0 0 4px}
+.staff-other p{font-size:20px;line-height:1.6;font-weight:750;overflow-wrap:anywhere}
+.staff-disclaimer{font-size:15px;line-height:1.6;color:#4d6470;margin:18px 0}
+.staff-view .emergency-call-link{font-size:19px;line-height:1.4;padding:17px 13px;border-radius:15px;box-shadow:none}
+.staff-close{display:block;width:100%;margin:16px 0 0;padding:17px 15px;font-size:18px;border-radius:15px}
+.staff-print{display:block;width:100%;margin:10px 0 0;font-size:15px;padding:13px}
+@media print{body.staff-mode{overflow:visible!important}#staffView{position:fixed!important;inset:0!important;width:100%!important;height:auto!important;overflow:visible!important;padding:9px!important}.staff-sheet{max-width:100%!important}.staff-close,.staff-print,.emergency-call-link{display:none!important}.staff-head h2{font-size:35px}.staff-head p,.staff-symptoms li{font-size:20px}}
 </style>
 </head>
 <body>
@@ -278,22 +306,38 @@ button.call-link,button.emergency-call,button.emergency-call-link{border:0;curso
         <div id="symptomChecklist" class="symptom-checklist"></div>
         <label class="field-label" for="otherSymptom" data-i="symptomOtherLabel">その他、気になる様子（任意）</label>
         <textarea id="otherSymptom" class="input" rows="2" maxlength="180" data-i-placeholder="symptomOtherPlaceholder" placeholder="例：いつもより反応が弱い"></textarea>
+        <p class="small" data-i="staffFreeTextNote">自由入力は自動翻訳されません。日本語以外で入力した場合は、スタッフ画面に「詳しくは本人・保護者に確認」と表示されます。</p>
         <p class="small" data-i="symptomChecklistHint">迷った場合も、無理をさせず涼しい場所へ移動し、周囲の大人やスタッフに伝えてください。</p>
         <button class="primary" id="showStaffView" data-i="showToStaff">スタッフに見せる画面を作る</button>
         <button class="secondary" id="clearSymptoms" style="width:100%;margin-top:8px" data-i="resetSymptoms">選択をクリア</button>
         <p id="symptomFormMessage" class="small" role="status" aria-live="polite"></p>
       </div>
-      <div id="staffView" class="staff-view hidden" role="region" aria-live="polite" aria-label="Staff assistance screen">
-        <div class="staff-head"><div class="staff-kicker" data-i="staffScreenKicker">PLEASE HELP</div><h2 data-i="staffScreenTitle">施設スタッフの方へ：救護をお願いします</h2><p data-i="staffScreenIntro">子どもに以下の症状があります。熱中症の可能性が心配です。</p></div>
-        <div class="staff-language"><b>日本語</b><p>子どもに以下の症状があります。熱中症の可能性が心配です。涼しい場所への移動、体を冷やすこと、必要な救護・医療支援をお願いします。</p><b>English</b><p>My child has the symptoms listed below. We are concerned about possible heat illness. Please help us move to a cool place and arrange medical assistance if needed.</p><b>한국어</b><p>아이에게 아래 증상이 있습니다. 열사병이 의심되어 걱정됩니다. 시원한 장소로 이동하고 필요한 응급·의료 지원을 받을 수 있도록 도와주세요.</p></div>
-        <div class="staff-meta"><div><b data-i="staffAgeLabel">年齢</b><span id="staffAgeValue">—</span></div><div><b data-i="staffOnsetLabel">症状が始まった時期</b><span id="staffOnsetValue">—</span></div><div><b data-i="staffTimeLabel">この画面の作成時刻</b><span id="staffTimeValue">—</span></div></div>
-        <div id="staffUrgentNotice" class="staff-urgent hidden"></div>
-        <h3 data-i="staffSelectedLabel">チェックされた症状</h3><ul id="staffSelectedSymptoms" class="staff-symptoms"></ul>
-        <div id="staffOtherRow" class="hidden"><b data-i="symptomOtherLabel">その他、気になる様子</b><p id="staffOtherValue"></p></div>
-        <p class="staff-disclaimer" data-i="staffDisclaimer">この画面は症状を伝える補助であり、診断ではありません。状態が悪い場合は直ちに救急要請してください。</p>
-        <button class="primary emergency-call-link hidden" id="staffEmergencyAction" data-emergency-entry="true" type="button" data-i="staffCall119">119番に電話</button>
-        <button class="secondary" id="printStaffView" style="width:100%;margin-top:8px" data-i="staffPrint">この画面を印刷／PDF保存</button>
-        <button class="secondary" id="hideStaffView" style="width:100%;margin-top:8px" data-i="staffHide">チェックに戻る</button>
+      <!-- Staff-facing page: always Japanese, regardless of the visitor’s selected language. -->
+      <div id="staffView" class="staff-view hidden" role="dialog" aria-modal="true" aria-labelledby="staffTitle" lang="ja">
+        <div class="staff-sheet">
+          <div class="staff-head">
+            <div class="staff-kicker">施設のスタッフの方へ</div>
+            <h2 id="staffTitle">助けてください</h2>
+            <p>子どもの体調が悪くなりました。<br>熱中症の可能性があります。</p>
+          </div>
+          <div class="staff-language">
+            <p><strong>涼しい場所で休ませ、体を冷やすお手伝いをお願いします。</strong></p>
+            <p>必要に応じて、救護室への案内や医療機関への相談をお願いします。</p>
+          </div>
+          <h3 class="staff-section-title">現在の症状</h3>
+          <ul id="staffSelectedSymptoms" class="staff-symptoms"></ul>
+          <div id="staffOtherRow" class="staff-other hidden"><h3>その他の気になる様子</h3><p id="staffOtherValue"></p></div>
+          <div class="staff-meta">
+            <div><b>子どもの年齢</b><span id="staffAgeValue">—</span></div>
+            <div><b>症状が始まった時期</b><span id="staffOnsetValue">—</span></div>
+            <div><b>画面の作成時刻</b><span id="staffTimeValue">—</span></div>
+          </div>
+          <div id="staffUrgentNotice" class="staff-urgent hidden" role="alert"></div>
+          <p class="staff-disclaimer">※ この画面は症状を伝えるためのもので、診断ではありません。状態が重いときは、直ちに救急要請してください。</p>
+          <button class="primary emergency-call-link hidden" id="staffEmergencyAction" data-emergency-entry="true" type="button">緊急時：119番について確認する</button>
+          <button class="secondary staff-close" id="hideStaffView" type="button">← 症状チェックに戻る</button>
+          <button class="secondary staff-print" id="printStaffView" type="button">この画面を印刷・保存する</button>
+        </div>
       </div>
     </section>
 
@@ -471,6 +515,9 @@ safetyButton:"Heat safety guide",symptomButton:"Check symptoms",tabSafety:"First
 firstTitle:"Thanks for opening our QR!",firstBody:"Care for WBGT Buddy as you explore safely.",secondTitle:"Collect drops!",secondBody:"Try a drink barcode, cooling spot QR, or quiz. Remember to take real water and rest breaks too!",thirdTitle:"Evolve with drops!",thirdBody:"Give 5 drops to evolve. Different kinds unlock different forms.",fourthTitle:"Turn on reminders?",fourthBody:"Get a gentle 30-minute break reminder while the page stays open. Background push after closing the page is not ready yet. You can change this later.",allowReminders:"Enable reminders & start",
 water:"Water drop",ion:"Electrolyte drop",cool:"Cool spot drop",quiz:"Quiz drop",needMore:"No drops yet. Collect them with quizzes or scans!",got:"Drop collected!",fed:"You fed a drop!",evolved:"Evolution unlocked!",nextEvolution:"{n} more drops until evolution!",level:"Level",none:"Not discovered yet",locked:"Locked",unlocked:"Unlocked!",notifyOn:"ON",notifyOff:"OFF",remind:"WBGT Buddy: Time to take a break and drink some water!",reminderEnabled:"30-minute reminders are on while this page is open.",reminderDisabled:"Reminders turned off.",resetAsk:"Reset all saved progress?",wrong:"Try again.",correct:"Correct! Quiz drop unlocked!",already:"You already claimed this quiz reward.",unknown:"That demo code is not recognized.",cameraUnsupported:"Camera scanning isn't supported here, or HTTPS is required. Try the demo buttons.",cameraError:"Can't open the camera. Check camera permission and HTTPS.",spotOnce:"You've already earned this location's drop!",menuWater:"Water form",menuIon:"Electrolyte form",menuCool:"Cool form",menuQuiz:"Quiz form",menuBase:"Basic form",hello:"Can I have some water?",happy:"Thank you! Yay!",hot:"Let's rest somewhere cool!",q1:"What should you do if you feel unwell in the heat?",q1a:["Keep going in the sun","Move somewhere cool and tell an adult","Run faster"],q2:"When should you drink water on a hot day?",q2a:["Regularly, before you feel thirsty","Only at the end of the day","Only after exercise"],q3:"Your friend may have heat illness. What do you do?",q3a:["Wait alone","Tell a nearby adult or staff member","Keep playing the quiz"]
 }};
+dictionary.ja.staffFreeTextNote='自由入力は自動翻訳されません。日本語以外で入力した場合は、スタッフ画面に「詳しくは本人・保護者に確認」と表示されます。';
+dictionary.en.staffFreeTextNote='Free-text notes are not translated automatically. If you write in another language, the Japanese staff screen will ask staff to check the details with you.';
+dictionary.ko.staffFreeTextNote='자유롭게 입력한 문장은 자동 번역되지 않아요. 일본어가 아니면 직원 화면에는 보호자에게 자세한 내용을 확인해 달라는 일본어 안내가 표시돼요.';
 const safeGet=(key)=>{try{return localStorage.getItem(key)}catch(e){return null}};
 const safeSet=(key,val)=>{try{localStorage.setItem(key,val)}catch(e){}};
 let lang=safeGet('wbgt-lang')||'ja';
@@ -490,27 +537,31 @@ function renderSymptomChoices(){
 function renderStaffSummary(showError=true){
  const selected=[...document.querySelectorAll('input[name="symptom"]:checked')].map(el=>el.value);
  const msg=$('symptomFormMessage');
- if(!selected.length){if(showError)msg.textContent=t('staffNoSymptoms');$('staffView').classList.add('hidden');return false;}
+ if(!selected.length){if(showError)msg.textContent=t('staffNoSymptoms');$('staffView').classList.add('hidden');document.body.classList.remove('staff-mode');return false;}
  msg.textContent='';
  const defs=selected.map(key=>symptomDefinitions.find(def=>def.key===key)).filter(Boolean);
- $('staffSelectedSymptoms').innerHTML=defs.map(def=>{const ja=dictionary.ja[def.key]||t(def.key), current=t(def.key);const label=lang==='ja'?ja:`${ja} / ${current}`;return `<li>${escapeHTML(label)}</li>`}).join('');
+ $('staffSelectedSymptoms').innerHTML=defs.map(def=>{const ja=dictionary.ja[def.key]||def.key;return `<li>${escapeHTML(ja)}</li>`}).join('');
  const age=$('childAge').value, onset=$('symptomOnset').value;
  const ageMap={unknown:'ageUnknown',infant:'ageInfant',toddler:'ageToddler',school:'ageSchool'};
  const onsetMap={unknown:'onsetUnknown',now:'onsetNow','10min':'onset10',hour:'onsetHour',earlier:'onsetEarlier'};
- $('staffAgeValue').textContent=t(ageMap[age]||'ageUnknown');
- $('staffOnsetValue').textContent=t(onsetMap[onset]||'onsetUnknown');
- $('staffTimeValue').textContent=new Date().toLocaleString(lang==='ja'?'ja-JP':lang==='ko'?'ko-KR':'en-US');
+ $('staffAgeValue').textContent=dictionary.ja[ageMap[age]||'ageUnknown'];
+ $('staffOnsetValue').textContent=dictionary.ja[onsetMap[onset]||'onsetUnknown'];
+ $('staffTimeValue').textContent=new Date().toLocaleString('ja-JP',{dateStyle:'short',timeStyle:'short'});
  const other=$('otherSymptom').value.trim();
  $('staffOtherRow').classList.toggle('hidden',!other);
- $('staffOtherValue').textContent=other;
+ // A free-text field cannot be translated reliably offline. To keep the staff page
+ // Japanese-only, show Japanese text as written, otherwise a Japanese request for clarification.
+ const japaneseOnly = /^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Number}\p{Punctuation}\p{Separator}]+$/u.test(other);
+ $('staffOtherValue').textContent=other && japaneseOnly ? other : 'その他にも気になる症状があります。詳しい状況は本人・保護者にご確認ください。';
  const urgent=defs.some(def=>def.urgent), medical=defs.some(def=>def.medical);
  $('staffEmergencyAction').classList.toggle('hidden',!urgent);
  const notice=$('staffUrgentNotice');
- if(urgent){notice.textContent=t('staffUrgent');notice.classList.remove('hidden');}
- else if(medical){notice.textContent=t('staffMedicalUrgent');notice.classList.remove('hidden');}
+ if(urgent){notice.textContent=dictionary.ja.staffUrgent;notice.classList.remove('hidden');}
+ else if(medical){notice.textContent=dictionary.ja.staffMedicalUrgent;notice.classList.remove('hidden');}
  else{notice.textContent='';notice.classList.add('hidden');}
  $('staffView').classList.remove('hidden');
- setTimeout(()=>$('staffView').scrollIntoView({behavior:'smooth',block:'start'}),80);
+ document.body.classList.add('staff-mode');
+ $('staffView').scrollTop=0;
  return true;
 }
 const $=x=>document.getElementById(x);
@@ -632,8 +683,8 @@ $('redeem').onclick=()=>{redeem($('codeInput').value);$('codeInput').value=''};
 $('choices').addEventListener('click',e=>{const btn=e.target.closest('[data-answer]');if(!btn)return;const chosen=Number(btn.dataset.answer);if(chosen!==qcorrect[qidx]){$('quizMsg').textContent=t('wrong');return}const code='QUIZ-'+qidx;if(!state.quizSeen.includes(code)){state.quizSeen.push(code);award('quiz');$('quizMsg').textContent=t('correct')}else{$('quizMsg').textContent=t('already')}setTimeout(()=>{qidx=(qidx+1)%3;renderQuiz()},850)});
 $('reset').onclick=()=>{if(confirm(t('resetAsk'))){state=fresh();save();draw();toast('OK')}};
 $('showStaffView').onclick=()=>renderStaffSummary(true);
-$('clearSymptoms').onclick=()=>{document.querySelectorAll('input[name="symptom"]').forEach(el=>el.checked=false);$('childAge').value='unknown';$('symptomOnset').value='unknown';$('otherSymptom').value='';$('staffView').classList.add('hidden');$('symptomFormMessage').textContent='';};
-$('hideStaffView').onclick=()=>{$('staffView').classList.add('hidden');$('symptomChecklist').scrollIntoView({behavior:'smooth',block:'start'});};
+$('clearSymptoms').onclick=()=>{document.querySelectorAll('input[name="symptom"]').forEach(el=>el.checked=false);$('childAge').value='unknown';$('symptomOnset').value='unknown';$('otherSymptom').value='';$('staffView').classList.add('hidden');document.body.classList.remove('staff-mode');$('symptomFormMessage').textContent='';};
+$('hideStaffView').onclick=()=>{$('staffView').classList.add('hidden');document.body.classList.remove('staff-mode');$('symptomChecklist').scrollIntoView({behavior:'smooth',block:'start'});};
 $('printStaffView').onclick=()=>window.print();
 $('reminder').onchange=e=>{state.enabled=e.target.checked;save();draw();toast(state.enabled?t('reminderEnabled'):t('reminderDisabled'))};
 setInterval(()=>{if(state.enabled){toast(t('remind'));if('Notification' in window&&Notification.permission==='granted'&&!document.hidden)try{new Notification('WBGTちゃん',{body:t('remind')})}catch(e){}}},30*60*1000);
