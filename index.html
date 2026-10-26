@@ -171,6 +171,7 @@ label.switch{display:flex;align-items:center;gap:7px;font-weight:800;font-size:1
 .emergency-confirm-call{display:block;background:#c83f35;color:white;text-align:center;font-size:14px;font-weight:900;text-decoration:none;padding:14px;border-radius:13px}
 .emergency-confirm-call:focus-visible,.emergency-confirm button:focus-visible{outline:3px solid #287e92;outline-offset:3px}
 .danger-info .emergency-call{margin-top:10px}
+.cautious-info{background:#fffaf0;border-color:#f0e2b7;color:#68592b}.cautious-info p{color:#68592b;margin:5px 0 0;font-size:12px;line-height:1.7}
 button.call-link,button.emergency-call,button.emergency-call-link{border:0;cursor:pointer;font-family:inherit}
 </style>
 </head>
@@ -267,7 +268,7 @@ button.call-link,button.emergency-call,button.emergency-call-link{border:0;curso
       <h1 class="title" data-i="symptomsTitle">症状チェック・スタッフ提示画面</h1>
       <p class="sub" data-i="symptomsIntro">当てはまる症状にチェックを入れ、画面を施設スタッフに見せてください。</p>
       <div class="info adult-first"><strong data-i="adultFirstTitle">🧑‍🧑‍🧒 まず大人や施設スタッフに知らせよう</strong><p data-i="adultFirstBody">めまい・頭痛などがある場合は遊ぶのをやめ、涼しい場所で休みながら大人に伝えてください。意識や反応がおかしいなどの緊急時は、すぐ119番へ。</p></div>
-      <div class="info danger-info"><strong data-i="symptomSafetyTitle">⚠️ これは診断ではありません</strong><p data-i="symptomSafetyBody">意識がおかしい・反応がない・けいれんなどのときは、入力を完了するのを待たずに119番。反応が悪い人に飲み物を飲ませないでください。</p><button class="call-link emergency-call" data-emergency-entry="true" type="button" data-i="staffCall119">119番に電話</button></div>
+      <div class="info cautious-info"><strong data-i="symptomSafetyTitle">⚠️ これは診断ではありません</strong><p data-i="symptomSafetyBody">意識がおかしい・反応がない・けいれんなどのときは、入力を完了するのを待たずに119番。反応が悪い人に飲み物を飲ませないでください。</p></div>
       <div class="card">
         <label class="field-label" for="childAge" data-i="ageLabel">お子さまの年齢（任意）</label>
         <select id="childAge" class="input"><option value="unknown" data-i="ageUnknown">わからない／回答しない</option><option value="infant" data-i="ageInfant">0〜1歳</option><option value="toddler" data-i="ageToddler">2〜5歳</option><option value="school" data-i="ageSchool">6歳以上</option></select>
