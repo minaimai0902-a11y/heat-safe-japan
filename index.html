@@ -209,7 +209,19 @@ body.staff-mode{overflow:hidden}
 .avatar-tap-hint{font-size:10px;color:#5c8997;text-align:center;font-weight:750;margin:6px 0 8px}
 .hero.sim-warm{background:linear-gradient(165deg,#fff3d7,#fffdf5 82%);border-color:#f4dfb2}
 .hero.sim-hot{background:linear-gradient(165deg,#ffe7c8,#fff9f0 82%);border-color:#f0d09b}
-.hero.sim-danger{background:linear-gradient(160deg,#ffdcd6,#fff2e8 86%);border-color:#f5b2a0}
+.hero.sim-danger{background:#42333f;border:2px solid #9f4a58;box-shadow:inset 0 0 0 3px #6a3b49,0 8px 24px rgba(61,30,42,.18)}
+.hero.sim-danger::before{content:"✖";color:#a96c76;opacity:.45;left:25px;top:47px}
+.hero.sim-danger::after{content:"…";color:#e49a95;opacity:.75;right:30px;top:92px}
+.hero.sim-danger .pill{background:#ffe5da;color:#943e40}
+.hero.sim-danger .heat-pill{background:#ae4050;color:#fff5f3;border-color:#d26b72;font-weight:900}
+.hero.sim-danger .speech{background:#fff3ef;border:2px solid #c38989;color:#692c3d;font-size:18px;font-weight:950;letter-spacing:.035em;min-width:66%;box-shadow:4px 5px 0 rgba(10,0,0,.13)}
+.hero.sim-danger .avatar-tap-hint,.hero.sim-danger .status,.hero.sim-danger .progress-tip{color:#f3d8dc}
+.hero.sim-danger .progress{background:#72505c}
+.hero.sim-danger .avatar-wrap{filter:drop-shadow(0 9px 0 rgba(9,5,16,.22))}
+.hero.sim-danger .avatar-wrap svg{animation:none!important;transform:translateY(10px) rotate(-5deg)!important;filter:none}
+.hero.sim-hot .avatar-wrap svg{animation:none;transform:translateY(6px)}
+.hero.sim-hot .speech{font-weight:900}
+@media(prefers-reduced-motion:reduce){.avatar-wrap svg{animation:none!important}}
 .hero.sim-shelter{background:linear-gradient(165deg,#d7f4fd,#f4fffa 84%);border-color:#bfe5e8}
 .heat-pill.sim-active{background:#fff7d7;color:#785219;font-size:11px;font-weight:900}
 .sim-control{margin:12px 0 4px}
@@ -571,13 +583,13 @@ dictionary.ko.staffFreeTextNote='자유롭게 입력한 문장은 자동 번역�
 
 // 夏の安全学習は仮想モード。ライブの暑さ指数や医学的な症状判定には使わない。
 Object.assign(dictionary.ja,{
- tapHint:'👆 WBGTちゃんをタップしてお話ししよう！',simToggle:'☀️ 夏の暑さを体験する',simTitle:'もし夏のWBGTが高くなったら？',simDescription:'外の暑さ指数（WBGT）を選んでみよう。これは体験用の数字だよ。',simDrink:'💧 水分をとる',simCool:'🏠 涼しい場所へ',simDisclaimer:'※ 表示するWBGTは架空の値で、現在地の実測値・体調の診断ではありません。体調が悪いときは遊びをやめ、すぐに大人やスタッフへ。',simReset:'体験を終了する',simChoose:'WBGTを選ぶと、WBGTちゃんのようすが変わるよ。',simStage0:'注意：暑さを感じなくても、こまめに水分をとろう。',simStage1:'警戒：積極的に休もう。WBGTちゃんもちょっと暑そう！',simStage2:'厳重警戒：激しい運動はやめて、涼しい場所へ移ろう。',simStage3:'危険：運動は原則中止。特に子どもは外での運動をやめよう。',simAfterDrink:'水分補給は大切。でも、暑い場所で無理を続けないでね。',simAfterCool:'涼しい場所でひと休み！外の暑さ指数は高いままかもしれないよ。',simWarm:'少し暑いかも…',simHot:'あついよ〜！すずしい場所に行きたい！',simDanger:'遊ぶのをやめて、涼しいところへ行こう！',simSheltered:'ふぅ〜、すずしい！ひと休みしよう。',simTapBase:['えへへ、くすぐったい！','いっしょに冒険しよう！','なでなで、ありがとう♪'],simTapWater:['ぽちゃん！お水の音がすき♪','ふふっ、くすぐったい！','休憩もわすれずにね！'],simTapIon:['やる気まんたん！','おっと、びっくり！','休むのも作戦だよ！'],simTapCool:['すずしい風がすき〜','のんびりが一番♪','ここでひとやすみ…'],simTapQuiz:['なぞなぞ、する？','じつは物知りなんだ！','クイズの準備はOK？'],simTapWarm:['日かげがほしいな…','休憩したいかも！'],simTapHot:['無理しないでね！','冷房のあるところへ行こう！'],simTapSheltered:['あ〜、ほっとする！','水分もこまめにとろうね！']
+ tapHint:'👆 WBGTちゃんをタップしてお話ししよう！',simToggle:'☀️ 夏の暑さを体験する',simTitle:'もし夏のWBGTが高くなったら？',simDescription:'外の暑さ指数（WBGT）を選んでみよう。これは体験用の数字だよ。',simDrink:'💧 水分をとる',simCool:'🏠 涼しい場所へ',simDisclaimer:'※ 表示するWBGTは架空の値で、現在地の実測値・体調の診断ではありません。体調が悪いときは遊びをやめ、すぐに大人やスタッフへ。',simReset:'体験を終了する',simChoose:'WBGTを選ぶと、WBGTちゃんのようすが変わるよ。',simStage0:'注意：暑さを感じなくても、こまめに水分をとろう。',simStage1:'警戒：積極的に休もう。WBGTちゃんもちょっと暑そう！',simStage2:'厳重警戒：激しい運動はやめて、涼しい場所へ移ろう。',simStage3:'危険：運動は原則中止。特に子どもは外での運動をやめよう。',simAfterDrink:'水分補給は大切。でも、暑い場所で無理を続けないでね。',simAfterCool:'涼しい場所でひと休み！外の暑さ指数は高いままかもしれないよ。',simWarm:'少し暑いかも…',simHot:'あついよ〜！すずしい場所に行きたい！',simDanger:'もう……限界……',simSheltered:'ふぅ〜、すずしい！ひと休みしよう。',simTapBase:['えへへ、くすぐったい！','いっしょに冒険しよう！','なでなで、ありがとう♪'],simTapWater:['ぽちゃん！お水の音がすき♪','ふふっ、くすぐったい！','休憩もわすれずにね！'],simTapIon:['やる気まんたん！','おっと、びっくり！','休むのも作戦だよ！'],simTapCool:['すずしい風がすき〜','のんびりが一番♪','ここでひとやすみ…'],simTapQuiz:['なぞなぞ、する？','じつは物知りなんだ！','クイズの準備はOK？'],simTapWarm:['日かげがほしいな…','休憩したいかも！'],simTapHot:['くらくら……する……','すずしい……ところ……'],simTapDanger:['たすけて……','……','うごけない……'],simTapSheltered:['あ〜、ほっとする！','水分もこまめにとろうね！']
 });
 Object.assign(dictionary.en,{
- tapHint:'👆 Tap WBGT Buddy to hear what it says!',simToggle:'☀️ Try a summer heat simulation',simTitle:'What if summer WBGT gets higher?',simDescription:'Choose an outdoor WBGT index. These are imaginary example values.',simDrink:'💧 Drink some water',simCool:'🏠 Move somewhere cool',simDisclaimer:'Demo only: this is not a live WBGT reading or a health assessment. If you feel unwell, stop playing and tell an adult or staff member.',simReset:'End simulation',simChoose:'Select a WBGT value to see how your buddy reacts.',simStage0:'Be aware: drink regularly, even if it does not feel very hot.',simStage1:'Caution: take more breaks. Your buddy is feeling warm.',simStage2:'High caution: stop strenuous exercise and move somewhere cooler.',simStage3:'Danger: stop exercise. Children especially should not exercise outdoors.',simAfterDrink:'Water helps, but do not push through the heat. Rest somewhere cooler.',simAfterCool:'Ah, a cooler spot! Remember outdoor WBGT may still be high.',simWarm:'It is getting warm…',simHot:'It is too hot! Can we find a cool spot?',simDanger:'Let’s stop playing outside and get somewhere cool!',simSheltered:'Phew, much cooler! Let’s rest.',simTapBase:['Hehe, that tickles!','Let’s go on an adventure!','Thanks for the pat!'],simTapWater:['Splash! I love water!','That tickles!','Remember to take breaks!'],simTapIon:['Full of energy!','Whoa, you surprised me!','Rest is part of the plan!'],simTapCool:['I love a cool breeze!','Let’s take it easy!','Time for a little rest…'],simTapQuiz:['Want a riddle?','I know lots of things!','Ready for a quiz?'],simTapWarm:['Some shade would be nice…','I might need a break!'],simTapHot:['Don’t push yourself!','Let’s go somewhere air-conditioned!'],simTapSheltered:['Ah, much better!','Let’s keep drinking regularly!']
+ tapHint:'👆 Tap WBGT Buddy to hear what it says!',simToggle:'☀️ Try a summer heat simulation',simTitle:'What if summer WBGT gets higher?',simDescription:'Choose an outdoor WBGT index. These are imaginary example values.',simDrink:'💧 Drink some water',simCool:'🏠 Move somewhere cool',simDisclaimer:'Demo only: this is not a live WBGT reading or a health assessment. If you feel unwell, stop playing and tell an adult or staff member.',simReset:'End simulation',simChoose:'Select a WBGT value to see how your buddy reacts.',simStage0:'Be aware: drink regularly, even if it does not feel very hot.',simStage1:'Caution: take more breaks. Your buddy is feeling warm.',simStage2:'High caution: stop strenuous exercise and move somewhere cooler.',simStage3:'Danger: stop exercise. Children especially should not exercise outdoors.',simAfterDrink:'Water helps, but do not push through the heat. Rest somewhere cooler.',simAfterCool:'Ah, a cooler spot! Remember outdoor WBGT may still be high.',simWarm:'It is getting warm…',simHot:'It is too hot! Can we find a cool spot?',simDanger:'I... can’t... go on...',simSheltered:'Phew, much cooler! Let’s rest.',simTapBase:['Hehe, that tickles!','Let’s go on an adventure!','Thanks for the pat!'],simTapWater:['Splash! I love water!','That tickles!','Remember to take breaks!'],simTapIon:['Full of energy!','Whoa, you surprised me!','Rest is part of the plan!'],simTapCool:['I love a cool breeze!','Let’s take it easy!','Time for a little rest…'],simTapQuiz:['Want a riddle?','I know lots of things!','Ready for a quiz?'],simTapWarm:['Some shade would be nice…','I might need a break!'],simTapHot:['I feel... dizzy...','Somewhere... cool...'],simTapDanger:['Help... please...','...','I can’t... move...'],simTapSheltered:['Ah, much better!','Let’s keep drinking regularly!']
 });
 Object.assign(dictionary.ko,{
- tapHint:'👆 WBGT짱을 탭하면 말을 해요!',simToggle:'☀️ 여름 더위 체험하기',simTitle:'여름철 WBGT가 높아지면?',simDescription:'야외 WBGT 지수를 선택해 봐요. 실제 날씨가 아닌 가상 상황이에요.',simDrink:'💧 물 마시기',simCool:'🏠 시원한 곳으로',simDisclaimer:'※ 표시된 WBGT는 가상의 수치이며 실시간 측정값이나 건강 상태 진단이 아니에요. 실제로 몸이 안 좋다면 게임을 멈추고 어른이나 직원에게 알려요.',simReset:'체험 종료하기',simChoose:'WBGT를 선택하면 캐릭터의 표정과 행동이 바뀌어요.',simStage0:'주의: 덥지 않게 느껴져도 물을 자주 마셔요.',simStage1:'경계: 적극적으로 쉬어요. WBGT짱도 조금 더워하네요!',simStage2:'엄중 경계: 격한 운동을 멈추고 시원한 곳으로 이동해요.',simStage3:'위험: 운동은 원칙적으로 중지해요. 특히 어린이는 야외 운동을 멈춰야 해요.',simAfterDrink:'물 마시기는 중요하지만, 더위 속에서 무리하면 안 돼요.',simAfterCool:'휴, 시원한 곳에서 쉬어요! 바깥의 WBGT는 여전히 높을 수 있어요.',simWarm:'조금 더운 것 같은데…',simHot:'너무 더워~! 시원한 데로 가자!',simDanger:'야외 놀이를 멈추고 시원한 곳으로 가자!',simSheltered:'휴~ 시원하다! 잠깐 쉬자.',simTapBase:['헤헤, 간지러워!','같이 모험할래?','쓰다듬어 줘서 고마워♪'],simTapWater:['퐁당! 물소리가 좋아♪','헤헤, 간지럽다!','쉬는 것도 잊지 마!'],simTapIon:['의욕 만땅!','앗, 깜짝이야!','쉬는 것도 작전이야!'],simTapCool:['시원한 바람이 좋아~','느긋한 게 최고야♪','여기서 잠깐 쉬자…'],simTapQuiz:['수수께끼 풀래?','나 사실 박학다식해!','퀴즈 준비됐어?'],simTapWarm:['그늘이 있으면 좋겠어…','좀 쉬고 싶은데!'],simTapHot:['절대 무리하지 마!','에어컨 있는 곳에 가자!'],simTapSheltered:['휴~ 살 것 같아!','수분도 자주 챙기자!']
+ tapHint:'👆 WBGT짱을 탭하면 말을 해요!',simToggle:'☀️ 여름 더위 체험하기',simTitle:'여름철 WBGT가 높아지면?',simDescription:'야외 WBGT 지수를 선택해 봐요. 실제 날씨가 아닌 가상 상황이에요.',simDrink:'💧 물 마시기',simCool:'🏠 시원한 곳으로',simDisclaimer:'※ 표시된 WBGT는 가상의 수치이며 실시간 측정값이나 건강 상태 진단이 아니에요. 실제로 몸이 안 좋다면 게임을 멈추고 어른이나 직원에게 알려요.',simReset:'체험 종료하기',simChoose:'WBGT를 선택하면 캐릭터의 표정과 행동이 바뀌어요.',simStage0:'주의: 덥지 않게 느껴져도 물을 자주 마셔요.',simStage1:'경계: 적극적으로 쉬어요. WBGT짱도 조금 더워하네요!',simStage2:'엄중 경계: 격한 운동을 멈추고 시원한 곳으로 이동해요.',simStage3:'위험: 운동은 원칙적으로 중지해요. 특히 어린이는 야외 운동을 멈춰야 해요.',simAfterDrink:'물 마시기는 중요하지만, 더위 속에서 무리하면 안 돼요.',simAfterCool:'휴, 시원한 곳에서 쉬어요! 바깥의 WBGT는 여전히 높을 수 있어요.',simWarm:'조금 더운 것 같은데…',simHot:'너무 더워~! 시원한 데로 가자!',simDanger:'더는……못 버티겠어……',simSheltered:'휴~ 시원하다! 잠깐 쉬자.',simTapBase:['헤헤, 간지러워!','같이 모험할래?','쓰다듬어 줘서 고마워♪'],simTapWater:['퐁당! 물소리가 좋아♪','헤헤, 간지럽다!','쉬는 것도 잊지 마!'],simTapIon:['의욕 만땅!','앗, 깜짝이야!','쉬는 것도 작전이야!'],simTapCool:['시원한 바람이 좋아~','느긋한 게 최고야♪','여기서 잠깐 쉬자…'],simTapQuiz:['수수께끼 풀래?','나 사실 박학다식해!','퀴즈 준비됐어?'],simTapWarm:['그늘이 있으면 좋겠어…','좀 쉬고 싶은데!'],simTapHot:['어지러워……','시원한 곳으로……'],simTapDanger:['도와줘……','……','움직일 수가……없어……'],simTapSheltered:['휴~ 살 것 같아!','수분도 자주 챙기자!']
 });
 const safeGet=(key)=>{try{return localStorage.getItem(key)}catch(e){return null}};
 const safeSet=(key,val)=>{try{localStorage.setItem(key,val)}catch(e){}};
@@ -643,18 +655,19 @@ function avatarSVG(game=false){
  const severe=reacting&&simIndex===3;
  const tap=game?(tapIndex%3):0;
  const eyes=reacting?(severe
- ?'<path d="M83 86Q91 80 99 86M126 86Q133 80 141 86" fill="none" stroke="#365a69" stroke-width="4" stroke-linecap="round"/><path d="M82 71L97 78M139 71L126 78" fill="none" stroke="#365a69" stroke-width="3" stroke-linecap="round"/>'
+ ?'<path d="M82 87Q91 93 100 87M124 87Q133 93 142 87" fill="none" stroke="#364452" stroke-width="4.5" stroke-linecap="round"/><path d="M86 81L100 83M124 83L139 81" fill="none" stroke="#855263" stroke-width="2.2" stroke-linecap="round"/>'
  :'<ellipse cx="91" cy="85" rx="5" ry="6" fill="#365a69"/><ellipse cx="133" cy="85" rx="5" ry="6" fill="#365a69"/><path d="M83 72L97 77M141 72L127 77" stroke="#365a69" stroke-width="2.5" stroke-linecap="round"/>')
  :(tap===1?'<path d="M84 85Q91 80 98 85" fill="none" stroke="#365a69" stroke-width="4" stroke-linecap="round"/><ellipse cx="133" cy="85" rx="6" ry="7" fill="#365a69"/>'
  :tap===2?'<path d="M83 85Q91 77 99 85M125 85Q133 77 141 85" fill="none" stroke="#365a69" stroke-width="4" stroke-linecap="round"/>'
  :`<ellipse cx="91" cy="85" rx="${advanced?6:5}" ry="7" fill="#365a69"/><ellipse cx="133" cy="85" rx="${advanced?6:5}" ry="7" fill="#365a69"/>`);
- const mouth=reacting?'<path d="M104 112Q112 98 122 112" stroke="#365a69" stroke-width="4" stroke-linecap="round" fill="none"/>':tap===1?'<ellipse cx="112" cy="105" rx="8" ry="5" fill="#365a69"/>':'<path d="M102 103Q111 113 123 103" fill="none" stroke="#365a69" stroke-width="4" stroke-linecap="round"/>';
- const sweat=reacting?'<path d="M163 60Q174 72 163 77Q153 72 163 60Z" fill="#77c9e9" stroke="#479dbc" stroke-width="1.5"/><path d="M151 40Q159 52 150 57Q143 53 151 40Z" fill="#96deed"/>':'';
+ const mouth=severe?'<path d="M103 111Q112 101 122 112Q115 120 104 116Z" fill="#7b475a" stroke="#4a3542" stroke-width="2"/>':reacting?'<path d="M104 112Q112 98 122 112" stroke="#365a69" stroke-width="4" stroke-linecap="round" fill="none"/>':tap===1?'<ellipse cx="112" cy="105" rx="8" ry="5" fill="#365a69"/>':'<path d="M102 103Q111 113 123 103" fill="none" stroke="#365a69" stroke-width="4" stroke-linecap="round"/>';
+ const sweat=reacting?'<path d="M163 60Q174 72 163 77Q153 72 163 60Z" fill="#77c9e9" stroke="#479dbc" stroke-width="1.5"/><path d="M151 40Q159 52 150 57Q143 53 151 40Z" fill="#96deed"/>'+(severe?'<path d="M58 79Q67 92 58 98Q49 93 58 79Z" fill="#77c9e9"/><path d="M72 44Q79 54 72 59Q66 55 72 44Z" fill="#96deed"/><path d="M175 89Q183 99 176 106Q169 101 175 89Z" fill="#77c9e9"/>':''):'';
 
  const item=f==='ion'?'<path d="M113 10L98 40H115L106 63L138 31H121L130 10Z" fill="#fff5a5" stroke="#b58b19" stroke-width="3"/>':f==='cool'?'<path d="M109 18L109 48 M94 33H124 M97 22L121 44 M121 22L97 44" stroke="#fff" stroke-width="5" stroke-linecap="round"/>':f==='water'?'<path d="M111 10C100 24 99 29 111 35C123 29 121 24 111 10" fill="#fff" stroke="#3990bd" stroke-width="2"/>':f==='quiz'?'<path d="M102 11L112 2L122 11L135 9L130 22L136 31L119 32L112 43L103 32L88 29L94 20L91 11Z" fill="#fff5a8" stroke="#946aa8" stroke-width="2"/>':'';
  return `<svg viewBox="0 0 220 190" role="img" aria-label="WBGT Buddy">
  <ellipse cx="110" cy="172" rx="59" ry="11" fill="#5a929f" opacity=".13"/>
  <defs><linearGradient id="bodyGradient" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+ <g transform="${severe?'translate(0 36) scale(1 .79)':''}">
  <path d="M62 87Q54 43 85 36Q105 15 133 32Q172 25 169 71Q185 107 161 143Q147 159 130 151Q110 160 92 151Q61 158 55 124Z" fill="url(#bodyGradient)" stroke="#77b2bd" stroke-width="3" stroke-linejoin="round"/>
  <path d="M67 135Q40 135 32 114" fill="none" stroke="#77b2bd" stroke-width="8" stroke-linecap="round"/>
  <path d="M158 132Q182 137 187 111" fill="none" stroke="#77b2bd" stroke-width="8" stroke-linecap="round"/>
@@ -666,6 +679,7 @@ function avatarSVG(game=false){
  <path d="M94 150Q88 168 98 168 M132 150Q126 168 137 168" fill="none" stroke="#77b2bd" stroke-width="8" stroke-linecap="round"/>
  ${advanced?`<path d="M85 40Q105 17 133 32" fill="none" stroke="#fff" stroke-width="6" opacity=".65"/>${item}`:''}
  ${level>2?'<circle cx="164" cy="44" r="8" fill="#f5dc77" stroke="#c5a357" stroke-width="2"/>':''}
+ </g>
  </svg>`}
 const entranceTexts={
  ja:{eyebrow:'HELLO, SUMMER!',title:'今日は、なにをする？',intro:'やりたいことを、ひとつ選んでね。',game:'ゲームであそぶ',gameDesc:'クイズと水滴でWBGTちゃんを育てよう',map:'涼しい場所をさがす',mapDesc:'給水・休憩・子連れ向け施設を探す',symptoms:'体調がよくない',symptomsDesc:'症状をチェックしてスタッフに伝える',emergency:'緊急のときは、日本の救急車「119」へ',primaryGame:'ゲーム',primarySafety:'熱中症について',primarySymptoms:'症状チェック',primaryMap:'マップ',primaryAlbum:'進化ずかん'},
@@ -707,6 +721,7 @@ function renderGameReaction(){
  hero.classList.toggle('sim-warm',simIndex===1&&!simProtected);
  hero.classList.toggle('sim-hot',simIndex===2&&!simProtected);
  hero.classList.toggle('sim-danger',danger);
+ hero.setAttribute('data-fictional-heat',String(simIndex>=0));
  hero.classList.toggle('sim-shelter',simProtected&&simIndex>=0);
  $('avatar').innerHTML=avatarSVG(true);
  const key='simTap'+form()[0].toUpperCase()+form().slice(1);
@@ -714,7 +729,8 @@ function renderGameReaction(){
  const p=Array.isArray(personality)?personality:t('simTapBase');
  let words;
  if(simProtected)words=tapIndex===0?t('simSheltered'):t('simTapSheltered')[(tapIndex-1)%t('simTapSheltered').length];
- else if(simIndex>=2)words=tapIndex===0?t(simIndex===3?'simDanger':'simHot'):t('simTapHot')[(tapIndex-1)%t('simTapHot').length];
+ else if(simIndex===3)words=tapIndex===0?t('simDanger'):t('simTapDanger')[(tapIndex-1)%t('simTapDanger').length];
+ else if(simIndex===2)words=tapIndex===0?t('simHot'):t('simTapHot')[(tapIndex-1)%t('simTapHot').length];
  else if(simIndex===1)words=tapIndex===0?t('simWarm'):t('simTapWarm')[(tapIndex-1)%t('simTapWarm').length];
  else words=tapIndex===0?(fedTotal()===0?t('hello'):t('happy')):p[(tapIndex-1)%p.length];
  $('speech').textContent=words;
