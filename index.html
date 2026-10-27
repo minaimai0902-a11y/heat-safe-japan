@@ -324,6 +324,7 @@ body.staff-mode{overflow:hidden}
 .heat-poster-sources{font-size:10px;color:#657e8b;padding:8px 13px;background:white}
 .heat-poster-sources a{color:#247c9a}
 @media(max-width:360px){.heat-stage-illustration svg{height:68px}.heat-stage-label{font-size:10px}.heat-detail-cols{grid-template-columns:1fr}}
+.auto-evo-badge{display:flex;align-items:center;gap:10px;padding:12px;margin:10px 0;border-radius:14px;border:1px solid #cbe6eb;background:#f1fbfd;font-weight:900;font-size:13px;color:#376c80}.auto-evo-badge.hidden{display:none!important}.auto-evo-badge span:first-child{font-size:29px}
 </style>
 </head>
 <body>
@@ -353,6 +354,7 @@ body.staff-mode{overflow:hidden}
         <div class="progress"><div id="pbar"></div></div>
         <div class="progress-tip" id="ptext">あと5滴で進化！</div>
       </div>
+      <div class="auto-evo-badge hidden" id="animalEvolutionNote" aria-live="polite"><span id="animalEvolutionEmoji">🐾</span><span id="animalEvolutionText"></span></div>
       <div class="sim-control">
         <button class="sim-toggle" id="simToggle" type="button" aria-expanded="false" aria-controls="simPanel"><span data-i="simToggle">☀️ 夏の暑さを体験する</span><span class="sim-caret" aria-hidden="true">⌄</span></button>
         <div class="sim-panel hidden" id="simPanel">
@@ -750,9 +752,10 @@ const safeGet=(key)=>{try{return localStorage.getItem(key)}catch(e){return null}
 const safeSet=(key,val)=>{try{localStorage.setItem(key,val)}catch(e){}};
 let lang=safeGet('wbgt-lang')||'ja';
 if(!dictionary[lang])lang='ja';
-const fresh=()=>({stock:{water:0,ion:0,cool:0,quiz:0},fed:{water:0,ion:0,cool:0,quiz:0},seen:[],quizSeen:[],discovered:[],enabled:false});
+const fresh=()=>({stock:{water:0,ion:0,cool:0,quiz:0},fed:{water:0,ion:0,cool:0,quiz:0},seen:[],quizSeen:[],discovered:[],enabled:false,evolutionAnimal:null});
 let state;try{state=JSON.parse(safeGet('wbgt-progress'))||fresh()}catch(e){state=fresh()}
 state.discovered = state.discovered || [];
+if(!['dog','cat','rabbit','squirrel'].includes(state.evolutionAnimal))state.evolutionAnimal=null;
 const allTypes=['water','ion','cool','quiz'];
 // Only for the opt-in summer demo; never interpreted as the user's real location.
 const simStages=[{wbgt:22,key:'simStage0'},{wbgt:26,key:'simStage1'},{wbgt:29,key:'simStage2'},{wbgt:32,key:'simStage3'}];
@@ -821,10 +824,80 @@ const save=()=>safeSet('wbgt-progress',JSON.stringify(state));
 function toast(msg){$('toast').textContent=msg;$('toast').classList.add('visible');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),3000)}
 function fedTotal(){return Object.values(state.fed).reduce((a,b)=>a+b,0)}
 function form(){let n=fedTotal();if(n<5)return 'base';let max=Math.max(...allTypes.map(k=>state.fed[k]));return allTypes.find(k=>state.fed[k]===max)||'water'}
+const byDrop={"water":"dog","ion":"cat","cool":"rabbit","quiz":"squirrel","base":"dog"};
+const emoji={"dog":"🐶","cat":"🐱","rabbit":"🐰","squirrel":"🐿️"};
+const animalTranslations={"ja":{"dog":"いぬ","cat":"ねこ","rabbit":"うさぎ","squirrel":"りす","message":"{animal}に進化！ レベル{level}"},"en":{"dog":"Dog","cat":"Cat","rabbit":"Rabbit","squirrel":"Squirrel","message":"Evolved into {animal}! Level {level}"},"ko":{"dog":"강아지","cat":"고양이","rabbit":"토끼","squirrel":"다람쥐","message":"{animal}(으)로 진화! 레벨 {level}"},"zh-CN":{"dog":"小狗","cat":"小猫","rabbit":"兔子","squirrel":"松鼠","message":"进化成{animal}！等级{level}"},"zh-TW":{"dog":"小狗","cat":"小貓","rabbit":"兔子","squirrel":"松鼠","message":"進化成{animal}！等級{level}"},"fr":{"dog":"chien","cat":"chat","rabbit":"lapin","squirrel":"écureuil","message":"Devenu {animal} ! Niveau {level}"},"es":{"dog":"perro","cat":"gato","rabbit":"conejo","squirrel":"ardilla","message":"¡Evolucionó a {animal}! Nivel {level}"}};
+function petSpecies(){
+ if(fedTotal()<10)return null;
+ if(!state.evolutionAnimal){state.evolutionAnimal=byDrop[form()]||"dog";save();}
+ return state.evolutionAnimal;
+}
+function renderAutoEvolution(){
+ const species=petSpecies(),node=$("animalEvolutionNote");
+ node.classList.toggle("hidden",!species);
+ if(!species)return;
+ const tr=animalTranslations[lang]||animalTranslations.en;
+ $("animalEvolutionEmoji").textContent=emoji[species];
+ $("animalEvolutionText").textContent=tr.message.replace("{animal}",tr[species]).replace("{level}",String(Math.floor(fedTotal()/5)+1));
+}
+function cuteAnimalSVG(kind,level,game){
+ const skins={
+ dog:{fur:"#ffeccf",light:"#fff9ed",shade:"#e4bd94",inner:"#d3a17c",stroke:"#ae8f78"},
+ cat:{fur:"#f1e4f8",light:"#fff9fe",shade:"#d6bde6",inner:"#f3b1c9",stroke:"#a594af"},
+ rabbit:{fur:"#fff5f8",light:"#ffffff",shade:"#ecdbe8",inner:"#efaec9",stroke:"#bca5b7"},
+ squirrel:{fur:"#ffe1bf",light:"#fff2dd",shade:"#dbaa82",inner:"#e9a98d",stroke:"#b28c71"}
+ };
+ const p=skins[kind]||skins.dog;
+ const hot=game&&simIndex>=1&&!simProtected,severe=hot&&simIndex===3;
+ const tap=game?tapIndex%3:0;
+ const tails={
+ dog:`<path d="M154 139Q183 142 177 120" fill="none" stroke="${p.stroke}" stroke-width="16" stroke-linecap="round"/><path d="M154 139Q183 142 177 120" fill="none" stroke="${p.fur}" stroke-width="11" stroke-linecap="round"/>`,
+ cat:`<path d="M150 143Q192 161 189 118Q188 104 179 110" fill="none" stroke="${p.stroke}" stroke-width="16" stroke-linecap="round"/><path d="M150 143Q192 161 189 118Q188 104 179 110" fill="none" stroke="${p.fur}" stroke-width="11" stroke-linecap="round"/>`,
+ rabbit:`<circle cx="162" cy="147" r="17" fill="${p.light}" stroke="${p.stroke}" stroke-width="3"/>`,
+ squirrel:`<path d="M148 138C189 157 202 126 193 102C185 82 168 92 176 107Q184 123 156 121Z" fill="${p.shade}" stroke="${p.stroke}" stroke-width="3"/><path d="M175 115Q186 119 182 132" fill="none" stroke="${p.light}" stroke-width="6" stroke-linecap="round"/>`
+ };
+ const ears={
+ dog:`<path d="M64 60C46 34 31 42 34 70Q37 90 56 91Q64 78 64 60Z" fill="${p.inner}" stroke="${p.stroke}" stroke-width="3"/><path d="M156 60C174 34 189 42 186 70Q183 90 164 91Q156 78 156 60Z" fill="${p.inner}" stroke="${p.stroke}" stroke-width="3"/>`,
+ cat:`<path d="M60 65L56 17Q77 23 96 47M124 47Q143 23 164 17L160 65Z" fill="${p.fur}" stroke="${p.stroke}" stroke-width="3" stroke-linejoin="round"/><path d="M64 30L78 46L65 42ZM156 30L142 46L155 42Z" fill="${p.inner}"/>`,
+ rabbit:`<path d="M76 63Q60 7 80 6Q96 7 99 57M121 57Q124 7 141 6Q161 7 145 63" fill="${p.fur}" stroke="${p.stroke}" stroke-width="3"/><path d="M80 19L89 51M141 19L131 51" fill="none" stroke="${p.inner}" stroke-width="8" stroke-linecap="round"/>`,
+ squirrel:`<circle cx="64" cy="55" r="20" fill="${p.shade}" stroke="${p.stroke}" stroke-width="3"/><circle cx="156" cy="55" r="20" fill="${p.shade}" stroke="${p.stroke}" stroke-width="3"/><circle cx="64" cy="55" r="10" fill="${p.inner}"/><circle cx="156" cy="55" r="10" fill="${p.inner}"/>`
+ };
+ const eyes=severe?'<path d="M81 94Q90 100 98 94M122 94Q131 100 139 94" fill="none" stroke="#636070" stroke-width="3.5" stroke-linecap="round"/>':
+ hot?'<ellipse cx="90" cy="93" rx="5" ry="6" fill="#465a67"/><ellipse cx="130" cy="93" rx="5" ry="6" fill="#465a67"/><path d="M81 82L97 85M123 85L139 82" stroke="#867282" stroke-width="2.5"/>':
+ tap===1?'<path d="M81 94Q90 85 99 94" fill="none" stroke="#485d6a" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="130" cy="94" rx="6.4" ry="8" fill="#485d6a"/><circle cx="128" cy="90" r="2.5" fill="white"/>':
+ tap===2?'<path d="M81 94Q90 85 99 94M121 94Q130 85 139 94" fill="none" stroke="#485d6a" stroke-width="3.5" stroke-linecap="round"/>':
+ '<ellipse cx="90" cy="94" rx="6.4" ry="8.3" fill="#485d6a"/><ellipse cx="130" cy="94" rx="6.4" ry="8.3" fill="#485d6a"/><circle cx="88" cy="91" r="2.6" fill="white"/><circle cx="128" cy="91" r="2.6" fill="white"/>';
+ const snouts={
+ dog:'<ellipse cx="110" cy="113" rx="18" ry="13" fill="#fff9f0"/><path d="M103 107Q110 102 117 107Q116 113 110 114Q104 113 103 107Z" fill="#79616a"/>',
+ cat:'<path d="M105 111L110 115L115 111Z" fill="#eba6c0"/><path d="M74 109L92 112M74 119L92 117M128 112L146 109M128 117L146 119" stroke="#a299af" stroke-width="2" fill="none" stroke-linecap="round"/>',
+ rabbit:'<path d="M106 111Q110 105 114 111Q112 115 110 115Q108 115 106 111Z" fill="#efaac3"/><rect x="105" y="120" width="5" height="7" rx="1.5" fill="white" stroke="#dfbed0" stroke-width="1"/><rect x="110" y="120" width="5" height="7" rx="1.5" fill="white" stroke="#dfbed0" stroke-width="1"/>',
+ squirrel:'<ellipse cx="90" cy="113" rx="21" ry="15" fill="#fff2df" opacity=".78"/><ellipse cx="130" cy="113" rx="21" ry="15" fill="#fff2df" opacity=".78"/><path d="M106 109Q110 105 114 109Q113 114 110 114Q107 114 106 109Z" fill="#a17164"/>'
+ };
+ const mouth=hot?'<path d="M103 120Q110 111 117 120" stroke="#6b5e69" stroke-width="3" fill="none" stroke-linecap="round"/>':tap===1?'<ellipse cx="110" cy="119" rx="4.8" ry="5.2" fill="#89666e"/>':'<path d="M103 116Q110 124 117 116" stroke="#6b5e69" stroke-width="3" fill="none" stroke-linecap="round"/>';
+ const patch=level>=4?'<path d="M120 147Q124 139 131 145Q139 139 142 147Q142 154 131 158Q121 154 120 147Z" fill="#fff" opacity=".85"/>':'';
+ const bow=level>=5?'<path d="M108 136L94 129Q92 137 94 145L108 140M112 136L126 129Q128 137 126 145L112 140" fill="#f3afc4" stroke="#bd879f" stroke-width="1.7"/><circle cx="110" cy="138" r="4" fill="#fff3c4"/>':'';
+ const stars=level>=6?'<path d="M176 37L181 47L193 51L184 57L181 69L175 58L164 52L175 47Z" fill="#ffe49a" stroke="#d5b86b" stroke-width="1.3"/>':'';
+ const sweat=hot?'<path d="M162 89Q175 103 162 112Q152 106 162 89Z" fill="#91d5ed"/>'+(severe?'<path d="M57 72Q67 86 57 93Q46 87 57 72Z" fill="#91d5ed"/>':''):'';
+ return `<svg viewBox="0 0 220 190" role="img" aria-label="${kind}">
+  <ellipse cx="110" cy="177" rx="56" ry="8" fill="#68a3b2" opacity=".13"/>
+  <g transform="${severe?'translate(0 7) rotate(3 110 110)':''}">
+   ${tails[kind]}
+   <ellipse cx="110" cy="137" rx="47" ry="34" fill="${p.fur}" stroke="${p.stroke}" stroke-width="3"/>
+   <ellipse cx="110" cy="146" rx="25" ry="18" fill="${p.light}" opacity=".85"/>
+   <ellipse cx="82" cy="160" rx="19" ry="10" fill="${p.light}" stroke="${p.stroke}" stroke-width="2.5"/>
+   <ellipse cx="138" cy="160" rx="19" ry="10" fill="${p.light}" stroke="${p.stroke}" stroke-width="2.5"/>
+   ${ears[kind]}
+   <ellipse cx="110" cy="88" rx="61" ry="51" fill="${p.fur}" stroke="${p.stroke}" stroke-width="3"/>
+   <ellipse cx="76" cy="108" rx="11" ry="7" fill="#f3a5b7" opacity=".48"/>
+   <ellipse cx="144" cy="108" rx="11" ry="7" fill="#f3a5b7" opacity=".48"/>
+   ${eyes}${snouts[kind]}${mouth}${sweat}${patch}${bow}${stars}
+  </g></svg>`;
+}
 function avatarSVG(game=false){
  const f=form(),level=Math.floor(fedTotal()/5)+1;
  const palette={base:['#fff5be','#f5d17d'],water:['#d4f5ff','#70cbf2'],ion:['#fff0b4','#f7bc56'],cool:['#caf8e7','#61cba9'],quiz:['#eddafa','#bb91e4']};
  const [c1,c2]=palette[f],advanced=f!=='base';
+ const pet=petSpecies();if(pet)return cuteAnimalSVG(pet,level,game);
  const reacting=game&&simIndex>=1&&!simProtected;
  const severe=reacting&&simIndex===3;
  const tap=game?(tapIndex%3):0;
@@ -907,6 +980,7 @@ function draw(){
  const total=fedTotal(),remaining=5-total%5,level=Math.floor(total/5)+1;
  $('level').textContent=`${t('level')} ${level}`;
  renderGameReaction();
+ renderAutoEvolution();
  $('evoStatus').textContent=`💧 ${total%5} / 5`;
  $('pbar').style.width=(total%5)*20+'%';
  $('ptext').textContent=t('nextEvolution').replace('{n}',remaining);
