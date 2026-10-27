@@ -911,7 +911,7 @@ function avatarSVG(game=false){
  const f=form(),level=Math.floor(fedTotal()/5)+1;
  const palette={base:['#fff5be','#f5d17d'],water:['#d4f5ff','#70cbf2'],ion:['#fff0b4','#f7bc56'],cool:['#caf8e7','#61cba9'],quiz:['#eddafa','#bb91e4']};
  const [c1,c2]=palette[f],advanced=f!=='base';
- const animal=game?petSpecies():petSpecies(),parts=animal?animalDetails(animal,level,c1,c2):{back:'',front:''};
+ const animal=petSpecies(),parts=animal?animalDetails(animal,level,c1,c2):{back:'',front:''};
  const reacting=game&&simIndex>=1&&!simProtected;
  const severe=reacting&&simIndex===3;
  const tap=game?(tapIndex%3):0;
