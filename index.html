@@ -293,6 +293,37 @@ body.staff-mode{overflow:hidden}
 .quiz-tier b{font-size:11px;font-weight:950}.quiz-tier span{color:#2988a9;font-weight:900;font-size:13px}
 .quiz-tier.selected{border:2px solid #3c9cb5;background:#ddf7fd}
 .quiz-invite{font-size:12px;color:#557983;background:#fff9e4;padding:10px;border-radius:12px;margin:8px 0 13px}
+/* Four-stage original illustrated heat-safety chart. Visual structure inspired by public-health infographics; artwork is original. */
+.entry-learn{background:#fff9ec;border-color:#f2dfb4}
+.entry-learn .entry-symbol{background:#fff0cc;color:#b48328}
+.heat-poster{margin:12px 0 18px;border:1px solid #c8e5ef;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 5px 0 #e8f3f6}
+.heat-poster-head{padding:17px 15px 13px;background:#0b4777;color:#fff}
+.heat-poster-kicker{font-size:10px;letter-spacing:.13em;font-weight:900;color:#a8def7}
+.heat-poster-head h2{font-size:20px;line-height:1.35;margin:5px 0;font-weight:950}
+.heat-poster-head p{font-size:12px;line-height:1.55;color:#d7effa;margin:0}
+.heat-stage-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;padding:10px 8px 6px;background:linear-gradient(90deg,#e9f7ff 0%,#e8f6f8 29%,#fff2df 66%,#ffe8e8 100%)}
+.heat-stage{min-width:0;display:flex;flex-direction:column;align-items:center;border:2px solid transparent;border-bottom-width:4px;border-radius:11px 11px 7px 7px;background:#ffffff7c;color:#1783bd;padding:7px 2px 8px;gap:5px;cursor:pointer}
+.heat-stage-1{color:#4da5b4}.heat-stage-2{color:#ed923e}.heat-stage-3{color:#d65159}
+.heat-stage[aria-selected="true"]{background:#fff;border-color:currentColor;box-shadow:0 3px 5px rgba(33,57,69,.07)}
+.heat-stage:focus-visible{outline:3px solid #222;outline-offset:1px}
+.heat-stage-number{font-size:10px;font-weight:950;opacity:.8}
+.heat-stage-illustration svg{width:100%;height:81px;display:block;max-width:76px}
+.heat-stage-label{font-size:11px;font-weight:950;line-height:1.32;min-height:30px;overflow-wrap:anywhere}
+.heat-stage-detail{padding:15px;background:#f5fbfe}
+.heat-stage-detail.stage-1{background:#effafb}.heat-stage-detail.stage-2{background:#fff5e8}.heat-stage-detail.stage-3{background:#fff0f0}
+.heat-detail-heading{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.heat-detail-symbol{display:grid;place-items:center;width:48px;height:48px;background:#fff;border-radius:14px;font-size:28px;flex:0 0 auto}
+.heat-detail-heading h3{margin:0 0 3px;font-size:16px;line-height:1.3;font-weight:950}
+.heat-detail-heading p{margin:0;font-size:11px;line-height:1.55;color:#5f7180}
+.heat-detail-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.heat-detail-col{background:white;border:1px solid #e2eaf1;border-radius:13px;padding:10px 9px}
+.heat-detail-col b{font-size:11px;font-weight:900;display:block;margin-bottom:7px;color:#356777}
+.heat-detail-col ul{padding-left:16px;margin:0;font-size:12px;line-height:1.6;color:#325568}
+.heat-detail-col li{padding-bottom:5px}
+.heat-stage-caveat{font-size:11px;color:#7b5360;line-height:1.7;background:#fff9f5;padding:12px 13px;margin:0}
+.heat-poster-sources{font-size:10px;color:#657e8b;padding:8px 13px;background:white}
+.heat-poster-sources a{color:#247c9a}
+@media(max-width:360px){.heat-stage-illustration svg{height:68px}.heat-stage-label{font-size:10px}.heat-detail-cols{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -403,6 +434,18 @@ body.staff-mode{overflow:hidden}
       <div class="eyebrow">HEAT ILLNESS GUIDE</div>
       <h1 class="title" data-i="safetyTitle">熱中症のサインと対処</h1>
       <p class="sub" data-i="safetyIntro">熱中症が疑われたら、ゲームより先に安全確保を。</p>
+      <section class="heat-poster" aria-labelledby="heatPosterHeading">
+  <header class="heat-poster-head"><span class="heat-poster-kicker">NOTICE • ACT • STAY SAFE</span><h2 id="heatPosterHeading" data-i="heatPosterTitle">暑さのサインを、絵で見よう</h2><p data-i="heatPosterIntro">気になる段階をタップして、症状と対処を確認。</p></header>
+  <div class="heat-stage-strip" role="tablist" aria-label="Heat illness guide stages">
+   <button class="heat-stage heat-stage-0" type="button" role="tab" aria-selected="true" aria-controls="heatStageDetail" data-heat-stage="0"><span class="heat-stage-number">01</span><span class="heat-stage-illustration"><svg viewBox="0 0 95 105" aria-hidden="true"><circle cx="42" cy="17" r="10" fill="currentColor"/><path d="M42 32V62M42 38L24 50M42 38L62 47M41 61L34 88M43 62L54 88" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M17 38l-2 -11M68 33l8 -9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span class="heat-stage-label" data-i="heatStage0">—</span></button><button class="heat-stage heat-stage-1" type="button" role="tab" aria-selected="false" aria-controls="heatStageDetail" data-heat-stage="1"><span class="heat-stage-number">02</span><span class="heat-stage-illustration"><svg viewBox="0 0 95 105" aria-hidden="true"><circle cx="65" cy="27" r="10" fill="currentColor"/><path d="M57 41L41 55L35 73M46 53L64 65M36 73L16 87M36 73L55 88" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M70 6q9 10 0 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg></span><span class="heat-stage-label" data-i="heatStage1">—</span></button><button class="heat-stage heat-stage-2" type="button" role="tab" aria-selected="false" aria-controls="heatStageDetail" data-heat-stage="2"><span class="heat-stage-number">03</span><span class="heat-stage-illustration"><svg viewBox="0 0 95 105" aria-hidden="true"><circle cx="71" cy="55" r="10" fill="currentColor"/><path d="M63 67L38 66L25 82M40 69L32 91M35 72L61 85M60 87L79 87" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M72 33q7 -9 13 0" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg></span><span class="heat-stage-label" data-i="heatStage2">—</span></button><button class="heat-stage heat-stage-3" type="button" role="tab" aria-selected="false" aria-controls="heatStageDetail" data-heat-stage="3"><span class="heat-stage-number">04</span><span class="heat-stage-illustration"><svg viewBox="0 0 95 105" aria-hidden="true"><circle cx="77" cy="78" r="10" fill="currentColor"/><path d="M63 80L24 80M25 80L13 90M35 81L37 94M49 80L57 95" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M78 45v12M69 51l-7 -9M87 51l7 -9" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg></span><span class="heat-stage-label" data-i="heatStage3">—</span></button>
+  </div>
+  <div id="heatStageDetail" class="heat-stage-detail" role="tabpanel" aria-live="polite">
+   <div class="heat-detail-heading"><div id="heatStageSymbol" class="heat-detail-symbol" aria-hidden="true">💧</div><div><h3 id="heatStageTitle"></h3><p id="heatStageIntro"></p></div></div>
+   <div class="heat-detail-cols"><div class="heat-detail-col"><b data-i="heatSymptomsCaption">🔎 サイン</b><ul id="heatStageSigns"></ul></div><div class="heat-detail-col"><b data-i="heatActionCaption">✅ どうする？</b><ul id="heatStageActions"></ul></div></div>
+  </div>
+  <p class="heat-stage-caveat" data-i="heatStagesNotDiagnosis">※ 症状が順番に進むとは限りません。軽そうに見えても急変することがあります。ここでは診断できません。</p>
+  <div class="heat-poster-sources">参考：<a href="https://www.mhlw.go.jp/seisakunitsuite/bunya/kenkou_iryou/kenkou/nettyuu/nettyuu_taisaku/pamph.html" target="_blank" rel="noopener noreferrer">厚生労働省</a> / <a href="https://www.epa.gov/emergencies-iaq/know-symptoms-heat-related-illnesses-infographic" target="_blank" rel="noopener noreferrer">US EPA</a>（イラストは本サイト独自制作）</div>
+ </section>
       <div class="info danger-info"><strong data-i="safetyEmergencyTitle">🚨 すぐに119番が必要なサイン</strong><p data-i="safetyEmergencyBody">意識がない・反応がおかしい・けいれん・極端に体が熱いなどの場合は、すぐ119番。救急車を待つ間も体を冷やしてください。</p><button class="call-link emergency-call" data-emergency-entry="true" type="button" data-i="staffCall119">119番に電話</button></div>
       <div class="visual-guide">
    <div class="visual-guide-head"><span class="guide-eyebrow">LOOK • NOTICE • ACT</span><h2 data-i="visualTitle">見るだけで分かる！暑さ対策</h2><p data-i="visualIntro">4つの行動を覚えよう。</p></div>
@@ -575,6 +618,11 @@ body.staff-mode{overflow:hidden}
         <button class="entry-option entry-game" type="button" data-entry="home">
           <span class="entry-symbol" aria-hidden="true">🎮</span>
           <span class="entry-option-copy"><b data-entry-i="game">ゲームであそぶ</b><small data-entry-i="gameDesc">クイズと水滴でWBGTちゃんを育てよう</small></span>
+          <span class="entry-arrow" aria-hidden="true">›</span>
+        </button>
+        <button class="entry-option entry-learn" type="button" data-entry="safety">
+          <span class="entry-symbol" aria-hidden="true">☀️</span>
+          <span class="entry-option-copy"><b data-entry-i="learn">熱中症について学ぶ</b><small data-entry-i="learnDesc">絵で症状と対処を覚えよう</small></span>
           <span class="entry-arrow" aria-hidden="true">›</span>
         </button>
         <button class="entry-option entry-map" type="button" data-entry="map">
@@ -816,6 +864,28 @@ Object.assign(entranceTexts,{"zh-CN":{"eyebrow":"HELLO, SUMMER!","title":"今天
 entranceTexts.ja.languagePrompt='🌍 まずは言語を選ぼう';
 entranceTexts.en.languagePrompt='🌍 Choose your language';
 entranceTexts.ko.languagePrompt='🌍 먼저 언어를 선택해 주세요';
+const heatEducation={"ja":[["予防","まだ元気でも、こまめに守ろう","💧",["長時間の屋外活動","強い日差し・高い湿度","水分・休憩不足"],["こまめに水分をとる","日陰や冷房のある場所で休む","帽子・涼しい服装で暑さを避ける"]],["気づく","小さな変化も見逃さないで","👀",["大量の汗・筋肉のけいれん","のどの渇き・軽いめまい","いつもより元気がない"],["活動をやめて涼しい場所へ","大人・施設スタッフに知らせる","水分補給と休憩を始める"]],["熱疲労の疑い","つらそうなら、休ませて冷やす","🧊",["強いだるさ・頭痛","めまい・吐き気・嘔吐","ふらつき・倒れることも"],["涼しい場所に移動し衣服をゆるめる","体を水・風などで冷やす","自力で飲める場合のみ補水。改善しなければ受診"]],["救急のサイン","これは緊急。すぐに119へ","🚑",["呼びかけに反応しない","受け答えがおかしい・けいれん","立てない・意識がおかしい"],["119へ連絡してすぐ冷却","呼吸や反応を確認してそばを離れない","意識が悪い人に飲み物を与えない"]]],"en":[["Prevent","Stay safe before symptoms appear","💧",["Long outdoor activities","Strong sun and humidity","Too little water or rest"],["Drink regularly","Rest in shade or air-conditioning","Avoid peak heat; wear a hat"]],["Notice","Spot early warning signs","👀",["Heavy sweating or cramps","Thirst or mild dizziness","Less energetic than usual"],["Stop activity and move somewhere cool","Tell an adult or staff member","Rest and drink if able"]],["Heat exhaustion?","Stop, cool down and seek help","🧊",["Marked fatigue or headache","Dizziness, nausea or vomiting","Unsteadiness or fainting"],["Move to a cool place and loosen clothes","Cool skin with water and air","Offer fluids only if alert and able; seek care if not improving"]],["Emergency","Call 119 right away","🚑",["Unresponsive to voice","Confusion or seizures","Collapse or altered consciousness"],["Call 119 and begin cooling","Stay with the person and monitor responses","Do not give drinks if not fully alert"]]],"ko":[["예방","증상이 없어도 미리 대비해요","💧",["장시간 야외 활동","강한 햇볕과 높은 습도","물과 휴식 부족"],["물을 자주 마시기","그늘·냉방 장소에서 쉬기","모자와 시원한 옷 착용"]],["초기 신호","작은 변화도 놓치지 마세요","👀",["땀이 많거나 근육 경련","목마름·가벼운 어지럼","평소보다 기운 없음"],["활동 멈추고 시원한 곳으로","어른이나 직원에게 알리기","수분 보충하고 휴식"]],["열탈진 의심","쉬면서 몸을 식혀요","🧊",["심한 피로·두통","어지럼·메스꺼움·구토","휘청이거나 쓰러짐"],["시원한 곳에서 옷 느슨하게","물·바람으로 몸 식히기","삼킬 수 있을 때만 보충, 호전 없으면 진료"]],["응급 신호","즉시 119에 신고하세요","🚑",["불러도 반응 없음","이상한 대답·경련","쓰러짐·의식 이상"],["119에 연락하고 냉각 시작","곁에 머물며 반응 확인","의식이 흐리면 마시게 하지 않기"]]],"zh-CN":[["预防","没症状也要提前防护","💧",["长时间户外活动","强烈阳光和潮湿","喝水或休息不足"],["经常补充水分","在阴凉或空调房休息","戴帽子并避开最热时段"]],["注意信号","不要忽略身体变化","👀",["大量出汗或肌肉痉挛","口渴或轻微头晕","比平时没精神"],["停止活动，移至凉爽处","告诉大人或工作人员","休息并在可以吞咽时补水"]],["疑似热衰竭","马上休息并降温","🧊",["明显乏力或头痛","头晕、恶心或呕吐","走不稳或晕倒"],["去凉爽处，松开衣物","用水和风降温","能自行饮水时补液；不改善请就医"]],["紧急信号","立即拨打119","🚑",["呼叫无反应","意识混乱或抽搐","倒下或意识异常"],["拨打119并开始降温","守在身边观察反应","意识不清时不要喂水"]]],"zh-TW":[["預防","沒有症狀也要提前防護","💧",["長時間戶外活動","強烈陽光與潮濕","喝水或休息不足"],["經常補充水分","在陰涼或冷氣房休息","戴帽子並避開最熱時段"]],["注意訊號","別忽略身體的變化","👀",["大量流汗或肌肉痙攣","口渴或輕微頭暈","比平常沒精神"],["停止活動，移至涼爽處","告訴大人或工作人員","休息並在可以吞嚥時補水"]],["疑似熱衰竭","立刻休息並降溫","🧊",["明顯無力或頭痛","頭暈、噁心或嘔吐","走不穩或昏倒"],["去涼爽處、鬆開衣物","用水和風降溫","能自行喝水時補水，不改善請就醫"]],["緊急訊號","立即撥打119","🚑",["呼叫無反應","意識混亂或抽搐","倒下或意識異常"],["撥打119並開始降溫","守在身旁觀察反應","意識不清時不要餵水"]]],"fr":[["Prévenir","Agissez avant les premiers signes","💧",["Activité prolongée dehors","Soleil fort et humidité","Manque d'eau ou de repos"],["Boire régulièrement","Se reposer à l'ombre ou au frais","Éviter les heures les plus chaudes"]],["Repérer","Reconnaître les premiers signes","👀",["Forte transpiration ou crampes","Soif ou léger vertige","Moins d'énergie que d'habitude"],["Arrêter l'activité et aller au frais","Prévenir un adulte ou le personnel","Se reposer et boire si possible"]],["Épuisement ?","Arrêter et commencer à refroidir","🧊",["Grande fatigue ou mal de tête","Vertiges, nausées ou vomissements","Perte d'équilibre ou évanouissement"],["Aller au frais, desserrer les vêtements","Refroidir avec de l'eau et de l'air","Boire si possible ; consulter sans amélioration"]],["Urgence","Appeler le 119 immédiatement","🚑",["Ne réagit plus à la voix","Confusion ou convulsions","Effondrement ou conscience altérée"],["Appeler le 119 et refroidir","Rester auprès de la personne","Ne rien faire boire si conscience altérée"]]],"es":[["Prevenir","Actúa antes de tener síntomas","💧",["Actividad prolongada al aire libre","Sol intenso y humedad","Poca agua o descanso"],["Beber con frecuencia","Descansar a la sombra o con aire acondicionado","Evitar las horas más calurosas"]],["Detectar","Reconoce las primeras señales","👀",["Sudor abundante o calambres","Sed o mareo leve","Menos energía de lo habitual"],["Detener la actividad e ir a un lugar fresco","Avisar a un adulto o al personal","Descansar y beber si es posible"]],["¿Agotamiento?","Detente y comienza a enfriar","🧊",["Fatiga intensa o dolor de cabeza","Mareo, náuseas o vómitos","Inestabilidad o desmayo"],["Ir a un lugar fresco y aflojar la ropa","Enfriar con agua y aire","Beber solo si puede; buscar asistencia si no mejora"]],["Emergencia","Llama al 119 inmediatamente","🚑",["No responde a la voz","Confusión o convulsiones","Desmayo o conciencia alterada"],["Llamar al 119 y empezar a enfriar","No dejar a la persona sola","No dar líquidos si no está plenamente consciente"]]]};
+const heatPosterLabels={"ja":{"heatPosterTitle":"熱中症のサインを、絵で見よう","heatPosterIntro":"4つの場面をタップして、症状と対処を確認しよう。","heatSymptomsCaption":"🔎 こんなサイン","heatActionCaption":"✅ こうしよう","heatStagesNotDiagnosis":"※ 必ずこの順番で進むわけではありません。突然重くなることもあります。これは診断ではありません。"},"en":{"heatPosterTitle":"Heat safety at a glance","heatPosterIntro":"Tap each illustration for signs and actions.","heatSymptomsCaption":"🔎 Look for","heatActionCaption":"✅ What to do","heatStagesNotDiagnosis":"Symptoms do not necessarily occur in order and can worsen suddenly. This is not a diagnosis."},"ko":{"heatPosterTitle":"그림으로 보는 열중증 신호","heatPosterIntro":"각 단계를 눌러 증상과 대처법을 확인해요.","heatSymptomsCaption":"🔎 이런 신호","heatActionCaption":"✅ 이렇게 해요","heatStagesNotDiagnosis":"반드시 이 순서로 진행되지는 않아요. 갑자기 심해질 수도 있어요. 진단 도구가 아닙니다."},"zh-CN":{"heatPosterTitle":"看图了解中暑的信号","heatPosterIntro":"点击每个阶段，查看症状和应对方式。","heatSymptomsCaption":"🔎 注意这些信号","heatActionCaption":"✅ 如何应对","heatStagesNotDiagnosis":"症状不一定按顺序出现，也可能突然加重。此页面不能用于诊断。"},"zh-TW":{"heatPosterTitle":"看圖了解中暑的訊號","heatPosterIntro":"點選每個階段，查看症狀與處理方式。","heatSymptomsCaption":"🔎 留意這些訊號","heatActionCaption":"✅ 如何處理","heatStagesNotDiagnosis":"症狀不一定按照順序出現，也可能突然加重。此頁面不能用於診斷。"},"fr":{"heatPosterTitle":"Reconnaître les effets de la chaleur","heatPosterIntro":"Touchez une étape pour voir les signes et les gestes utiles.","heatSymptomsCaption":"🔎 Signes","heatActionCaption":"✅ Que faire","heatStagesNotDiagnosis":"Les symptômes ne suivent pas forcément cet ordre et peuvent s'aggraver brusquement. Ce guide ne pose pas de diagnostic."},"es":{"heatPosterTitle":"Reconoce los efectos del calor","heatPosterIntro":"Toca cada etapa para ver señales y acciones.","heatSymptomsCaption":"🔎 Señales","heatActionCaption":"✅ Qué hacer","heatStagesNotDiagnosis":"Los síntomas no siempre aparecen en ese orden y pueden empeorar de repente. Esta guía no es un diagnóstico."}};
+let heatStageIndex=0;
+function renderHeatStages(){
+ const stage=(heatEducation[lang]||heatEducation.en)[heatStageIndex];
+ document.querySelectorAll('[data-heat-stage]').forEach(btn=>{
+  const i=Number(btn.dataset.heatStage);btn.setAttribute('aria-selected',String(i===heatStageIndex));
+  btn.querySelector('.heat-stage-label').textContent=(heatEducation[lang]||heatEducation.en)[i][0];
+ });
+ const panel=$('heatStageDetail');
+ panel.className='heat-stage-detail stage-'+heatStageIndex;
+ $('heatStageSymbol').textContent=stage[2];
+ $('heatStageTitle').textContent=stage[0];
+ $('heatStageIntro').textContent=stage[1];
+ $('heatStageSigns').innerHTML=stage[3].map(x=>'<li>'+escapeHTML(x)+'</li>').join('');
+ $('heatStageActions').innerHTML=stage[4].map(x=>'<li>'+escapeHTML(x)+'</li>').join('');
+}
+Object.entries(heatPosterLabels).forEach(([language,dict])=>Object.assign(dictionary[language],dict));
+document.querySelectorAll('[data-heat-stage]').forEach(btn=>btn.addEventListener('click',()=>{
+ heatStageIndex=Number(btn.dataset.heatStage);renderHeatStages();
+}));
+Object.entries({"ja":{"learn":"熱中症について学ぶ","learnDesc":"絵で症状と対処を覚えよう"},"en":{"learn":"Learn about heat illness","learnDesc":"Recognize signs and what to do"},"ko":{"learn":"열중증에 대해 배우기","learnDesc":"그림으로 증상과 대처법 알아보기"},"zh-CN":{"learn":"学习预防中暑","learnDesc":"看图了解症状和应对方法"},"zh-TW":{"learn":"學習預防中暑","learnDesc":"看圖了解症狀與處理方式"},"fr":{"learn":"Comprendre les malaises dus à la chaleur","learnDesc":"Reconnaître les signes et réagir"},"es":{"learn":"Aprende sobre el golpe de calor","learnDesc":"Reconoce las señales y cómo actuar"}}).forEach(([l,v])=>Object.assign(entranceTexts[l],v));
 function renderEntrance(){
  const labels=entranceTexts[lang]||entranceTexts.ja;
  $('entryLanguage').value=lang;
@@ -830,6 +900,7 @@ function draw(){
  document.querySelectorAll('[data-i]').forEach(el=>{const key=el.dataset.i;if(key==='splashTitle'||key==='splashSub')el.innerHTML=t(key);else el.textContent=t(key)});
  document.querySelectorAll('[data-i-placeholder]').forEach(el=>el.placeholder=t(el.dataset.iPlaceholder));
  renderEntrance();
+ renderHeatStages();
  renderSymptomChoices();
  if($('staffView')&&!$('staffView').classList.contains('hidden'))renderStaffSummary(false);
  const total=fedTotal(),remaining=5-total%5,level=Math.floor(total/5)+1;
