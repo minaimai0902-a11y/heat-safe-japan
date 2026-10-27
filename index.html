@@ -246,6 +246,15 @@ body.staff-mode{overflow:hidden}
 .sim-disclaimer{font-size:10px;line-height:1.6;color:#7b929b;margin:12px 0 0}
 .sim-reset{border:0;background:transparent;padding:8px 1px 0;text-decoration:underline;text-underline-offset:3px;font-weight:850;font-size:10px;color:#56869a}
 @media(prefers-reduced-motion:reduce){.avatar-wrap svg{animation:none!important}}
+/* Language selection — same soft mint styling as the original site */
+.entry-language-prompt{font-weight:950;font-size:12px;color:#337187;text-align:center;margin:9px 0 7px}
+.entry-flags{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:3px 0 10px}
+.entry-flags button{border:1px solid #cce8ef;border-radius:12px;padding:9px 4px;background:#fff;color:#3a6476;font-size:17px;cursor:pointer;box-shadow:0 2px 0 #e1f2f5}
+.entry-flags button span{font-size:11px;display:block;font-weight:850;white-space:nowrap}
+.entry-flags button[aria-pressed="true"]{background:#d5f4fc;border:2px solid #3299b8;box-shadow:0 2px 0 #8dceda}
+.entry-flags button:focus-visible{outline:3px solid #357a96;outline-offset:2px}
+@media(min-height:720px){.entry-flags{margin-bottom:13px}}
+@media(max-width:330px){.entry-flags button span{font-size:9px}}
 </style>
 </head>
 <body>
@@ -254,7 +263,7 @@ body.staff-mode{overflow:hidden}
   <div class="header">
     <div class="brand"><span>💧</span> WBGTちゃん</div>
     <div style="display:flex;gap:7px;align-items:center">
-      <select class="lang" id="language" aria-label="Language"><option value="ja">日本語</option><option value="en">English</option><option value="ko">한국어</option></select>
+      <select class="lang" id="language" aria-label="Language"><option value="ja">🇯🇵 日本語</option><option value="en">🇬🇧 English</option><option value="ko">🇰🇷 한국어</option><option value="zh-CN">🇨🇳 简体中文</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="fr">🇫🇷 Français</option><option value="es">🇪🇸 Español</option></select>
       <button class="head-btn" id="contactOpen" data-i="contactOpen">☎ HELP</button><button class="head-btn" id="help">?</button>
     </div>
   </div>
@@ -401,8 +410,8 @@ body.staff-mode{overflow:hidden}
           <div id="staffUrgentNotice" class="staff-urgent hidden" role="alert"></div>
           <p class="staff-disclaimer">※ この画面は症状を伝えるためのもので、診断ではありません。状態が重いときは、直ちに救急要請してください。</p>
           <button class="primary emergency-call-link hidden" id="staffEmergencyAction" data-emergency-entry="true" type="button">緊急時：119番について確認する</button>
-          <button class="secondary staff-close" id="hideStaffView" type="button">← 症状チェックに戻る</button>
-          <button class="secondary staff-print" id="printStaffView" type="button">この画面を印刷・保存する</button>
+          <button class="secondary staff-close" id="hideStaffView" type="button" lang="en">← Back to symptoms</button>
+          <button class="secondary staff-print" id="printStaffView" type="button" lang="en">Print / save this screen</button>
         </div>
       </div>
     </section>
@@ -467,8 +476,18 @@ body.staff-mode{overflow:hidden}
       <div class="entry-head">
         <span class="entry-tag">WBGTちゃん <span aria-hidden="true">✳</span></span>
         <select class="entry-language" id="entryLanguage" aria-label="Language">
-          <option value="ja">日本語</option><option value="en">English</option><option value="ko">한국어</option>
+          <option value="ja">🇯🇵 日本語</option><option value="en">🇬🇧 English</option><option value="ko">🇰🇷 한국어</option><option value="zh-CN">🇨🇳 简体中文</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="fr">🇫🇷 Français</option><option value="es">🇪🇸 Español</option>
         </select>
+      </div>
+      <p class="entry-language-prompt" data-entry-i="languagePrompt">🌍 まずは言語を選ぼう</p>
+      <div class="entry-flags" role="group" aria-label="Choose your language">
+        <button type="button" data-lang-pick="ja">🇯🇵 <span>日本語</span></button>
+        <button type="button" data-lang-pick="en">🇬🇧 <span>English</span></button>
+        <button type="button" data-lang-pick="ko">🇰🇷 <span>한국어</span></button>
+        <button type="button" data-lang-pick="zh-CN">🇨🇳 <span>简体中文</span></button>
+        <button type="button" data-lang-pick="zh-TW">🇹🇼 <span>繁體中文</span></button>
+        <button type="button" data-lang-pick="fr">🇫🇷 <span>Français</span></button>
+        <button type="button" data-lang-pick="es">🇪🇸 <span>Español</span></button>
       </div>
       <div class="entry-mascot" id="entryAvatar" aria-hidden="true"></div>
       <span class="entry-eyebrow" data-entry-i="eyebrow">HELLO, SUMMER!</span>
@@ -685,6 +704,7 @@ function avatarSVG(game=false){
  ${level>2?'<circle cx="164" cy="44" r="8" fill="#f5dc77" stroke="#c5a357" stroke-width="2"/>':''}
  </g>
  </svg>`}
+const visitorControls={"ja":{"backStaff":"← 症状チェックに戻る","printStaff":"この画面を印刷・保存する","callStaff":"緊急時：119番について確認する"},"en":{"backStaff":"← Back to symptom check","printStaff":"Print / save this screen","callStaff":"Emergency: 119 information"},"ko":{"backStaff":"← 증상 체크로 돌아가기","printStaff":"화면 인쇄 / 저장","callStaff":"긴급 상황: 119 안내"},"zh-CN":{"backStaff":"← 返回症状检查","printStaff":"打印 / 保存此画面","callStaff":"紧急情况：119"},"zh-TW":{"backStaff":"← 返回症狀檢查","printStaff":"列印 / 儲存畫面","callStaff":"緊急情況：119"},"fr":{"backStaff":"← Retour aux symptômes","printStaff":"Imprimer / enregistrer","callStaff":"Urgence : informations sur le 119"},"es":{"backStaff":"← Volver a los síntomas","printStaff":"Imprimir / guardar","callStaff":"Emergencia: información sobre el 119"}};
 const entranceTexts={
  ja:{eyebrow:'HELLO, SUMMER!',title:'今日は、なにをする？',intro:'やりたいことを、ひとつ選んでね。',game:'ゲームであそぶ',gameDesc:'クイズと水滴でWBGTちゃんを育てよう',map:'涼しい場所をさがす',mapDesc:'給水・休憩・子連れ向け施設を探す',symptoms:'体調がよくない',symptomsDesc:'症状をチェックしてスタッフに伝える',emergency:'緊急のときは、日本の救急車「119」へ',primaryGame:'ゲーム',primarySafety:'熱中症について',primarySymptoms:'症状チェック',primaryMap:'マップ',primaryAlbum:'進化ずかん'},
  en:{eyebrow:'HELLO, SUMMER!',title:'What would you like to do?',intro:'Choose just one to get started.',game:'Play a game',gameDesc:'Take quizzes and grow your WBGT buddy',map:'Find a cool place',mapDesc:'Nearby water, rest areas and family facilities',symptoms:'I don\'t feel well',symptomsDesc:'Check symptoms and show staff',emergency:'In a medical emergency in Japan, call 119.',primaryGame:'Game',primarySafety:'Heat safety',primarySymptoms:'Symptoms',primaryMap:'Map',primaryAlbum:'Evolution book'},
@@ -693,12 +713,14 @@ const entranceTexts={
 function renderEntrance(){
  const labels=entranceTexts[lang]||entranceTexts.ja;
  $('entryLanguage').value=lang;
+ document.querySelectorAll('[data-lang-pick]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.langPick===lang)));
  document.querySelectorAll('[data-entry-i]').forEach(el=>{el.textContent=labels[el.dataset.entryI]||''});
  for(const key of ['primaryGame','primarySafety','primarySymptoms','primaryMap','primaryAlbum'])document.querySelectorAll('[data-i="'+key+'"]').forEach(el=>el.textContent=labels[key]);
  $('entryAvatar').innerHTML=avatarSVG();
 }
 function draw(){
  document.documentElement.lang=lang;$('language').value=lang;
+ if($('hideStaffView')){for(const [id,key] of [['hideStaffView','backStaff'],['printStaffView','printStaff'],['staffEmergencyAction','callStaff']]){const button=$(id);if(button){button.lang=lang;button.textContent=visitorControls[lang]?.[key]||visitorControls.en[key]}}}
  document.querySelectorAll('[data-i]').forEach(el=>{const key=el.dataset.i;if(key==='splashTitle'||key==='splashSub')el.innerHTML=t(key);else el.textContent=t(key)});
  document.querySelectorAll('[data-i-placeholder]').forEach(el=>el.placeholder=t(el.dataset.iPlaceholder));
  renderEntrance();
@@ -771,6 +793,10 @@ $('entryLanguage').addEventListener('change',e=>{
  $('language').value=e.target.value;
  $('language').dispatchEvent(new Event('change'));
 });
+document.querySelectorAll('[data-lang-pick]').forEach(btn=>btn.addEventListener('click',()=>{
+ $('entryLanguage').value=btn.dataset.langPick;
+ $('entryLanguage').dispatchEvent(new Event('change'));
+}));
 let step=0;function showOnboarding(){const dat=[['👋','firstTitle','firstBody'],['💧','secondTitle','secondBody'],['✨','thirdTitle','thirdBody'],['🔔','fourthTitle','fourthBody']][step];$('onIcon').textContent=dat[0];$('onStep').textContent=`WELCOME ${step+1}/4`;$('onTitle').textContent=t(dat[1]);$('onBody').textContent=t(dat[2]);$('onDots').innerHTML=[0,1,2,3].map(i=>`<i class="${i===step?'active':''}"></i>`).join('');$('onNext').textContent=step===3?t('allowReminders'):t('next')}
 function closeOnboarding(){safeSet('wbgt-intro','seen');$('onboarding').classList.remove('active')}
 $('onNext').onclick=()=>{if(step===3){state.enabled=true;save();draw();closeOnboarding();toast(t('reminderEnabled'));}else{step++;showOnboarding()}};$('onSkip').onclick=closeOnboarding;
