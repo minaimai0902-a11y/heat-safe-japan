@@ -324,26 +324,6 @@ body.staff-mode{overflow:hidden}
 .heat-poster-sources{font-size:10px;color:#657e8b;padding:8px 13px;background:white}
 .heat-poster-sources a{color:#247c9a}
 @media(max-width:360px){.heat-stage-illustration svg{height:68px}.heat-stage-label{font-size:10px}.heat-detail-cols{grid-template-columns:1fr}}
-/* Multi-stage animal evolution; preserves the original mascot silhouette and colors. */
-.pet-evolution{border:1px solid #b9e4e9;background:linear-gradient(160deg,#f3fcfc,#fffcf4);border-radius:19px;padding:14px;margin:12px 0 14px;box-shadow:0 4px 0 #e0f2f4}
-.pet-evolution.hidden{display:none}
-.pet-evo-top{display:flex;align-items:center;gap:9px}
-.pet-evo-sparkles{font-size:28px}
-.pet-evo-top h2{font-size:16px;font-weight:950;line-height:1.35;margin:0 0 2px}
-.pet-evo-top p{font-size:11px;line-height:1.5;color:#67818b;margin:0}
-.pet-species{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:12px}
-.pet-species button{background:#fff;border:1px solid #d5eaf0;border-radius:12px;padding:9px 3px;display:flex;flex-direction:column;align-items:center;gap:2px;color:#31647b}
-.pet-species button span{font-size:30px}.pet-species button b{font-size:11px;font-weight:900}
-.pet-species button[aria-pressed="true"]{border:2px solid #48a9c0;background:#dff7ff;box-shadow:0 2px 0 #aad7e0}
-.pet-species button:focus-visible{outline:3px solid #206985;outline-offset:2px}
-.pet-evo-info{font-size:12px;font-weight:850;text-align:center;margin:10px 0 0;color:#3c748a;line-height:1.5}
-.pet-evo-steps{font-size:11px;line-height:1.6;text-align:center;color:#6d828d;margin:8px 0 0}
-.pet-album-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:11px}
-.pet-album-item{border-radius:12px;background:#f1f9fb;border:1px solid #dbebf0;padding:9px 3px;text-align:center;color:#44758a}
-.pet-album-item b{font-size:12px;display:block}
-.pet-album-item span{font-size:28px;display:block}
-.pet-album-item.unselected{opacity:.6}
-.pet-album-item small{display:block;font-size:9px;color:#67828b}
 </style>
 </head>
 <body>
@@ -373,17 +353,6 @@ body.staff-mode{overflow:hidden}
         <div class="progress"><div id="pbar"></div></div>
         <div class="progress-tip" id="ptext">あと5滴で進化！</div>
       </div>
-      <section id="petEvolution" class="pet-evolution hidden" aria-labelledby="petEvoTitle">
-        <div class="pet-evo-top"><span class="pet-evo-sparkles" aria-hidden="true">✨</span><div><h2 id="petEvoTitle" data-i="petEvoTitle">レベル3！どうぶつに進化！</h2><p data-i="petEvoIntro">好きなどうぶつを選ぼう。あとで変えられるよ。</p></div></div>
-        <div class="pet-species" role="group" aria-label="Choose the evolved animal">
-          <button type="button" data-pet-animal="dog" aria-pressed="false"><span>🐶</span><b data-i="petDog">いぬ</b></button>
-          <button type="button" data-pet-animal="cat" aria-pressed="false"><span>🐱</span><b data-i="petCat">ねこ</b></button>
-          <button type="button" data-pet-animal="rabbit" aria-pressed="false"><span>🐰</span><b data-i="petRabbit">うさぎ</b></button>
-          <button type="button" data-pet-animal="squirrel" aria-pressed="false"><span>🐿️</span><b data-i="petSquirrel">りす</b></button>
-        </div>
-        <p class="pet-evo-info" id="petEvoInfo" aria-live="polite"></p>
-        <p class="pet-evo-steps" data-i="petEvoSteps">Lv.3 どうぶつの姿 → Lv.4 しっぽ・模様 → Lv.5 リボン → Lv.6 キラキラ</p>
-      </section>
       <div class="sim-control">
         <button class="sim-toggle" id="simToggle" type="button" aria-expanded="false" aria-controls="simPanel"><span data-i="simToggle">☀️ 夏の暑さを体験する</span><span class="sim-caret" aria-hidden="true">⌄</span></button>
         <div class="sim-panel hidden" id="simPanel">
@@ -599,7 +568,7 @@ body.staff-mode{overflow:hidden}
     <section class="screen" id="album">
       <div class="eyebrow">EVOLUTION BOOK</div><h1 class="title" data-i="albumTitle">進化ずかん</h1><p class="sub" data-i="albumSub">水滴を5つあげると、いちばん多くあげた種類によって姿が変わるよ。</p>
       <div class="grid-album" id="albumGrid"></div>
-      <div class="card pet-album"><h3 data-i="petAlbumTitle">🐾 レベル3からのどうぶつ進化</h3><p class="small" data-i="petAlbumDesc">10滴でどうぶつに進化！15滴、20滴、25滴でも姿が変わるよ。</p><div class="pet-album-grid" id="petAlbumGrid"></div></div>
+      
       <div class="card"><h3 data-i="settingsTitle">⚙️ 設定・体験用リセット</h3><p data-i="settingsSub">進行状況はこの端末のブラウザにだけ保存されます。</p><button class="secondary" id="reset" style="margin-top:12px;width:100%" data-i="resetButton">進行状況をリセット</button></div>
     </section>
   </main>
@@ -777,9 +746,6 @@ const addedLanguages={"zh-CN":{"campaign":"预防中暑活动","homeTitle":"培�
 for(const [language,labels] of Object.entries(addedLanguages))dictionary[language]={...dictionary.en,...labels};
 Object.entries({"ja":{"visualTitle":"絵でわかる！暑さから身を守ろう","visualIntro":"まずは、4つの行動を覚えよう。","picCoolPlace":"日陰へ","picCoolPlaceDesc":"涼しい場所に移動","picWater":"こまめに飲む","picWaterDesc":"のどが渇く前に","picCoolBody":"体を冷やす","picCoolBodyDesc":"首・わきなどを冷やす","picTellAdult":"大人に知らせる","picTellAdultDesc":"体調が悪いときはすぐ","dehydTitle":"からだの水分、足りてる？","dehydSubtitle":"おとなと一緒に、気になるサインをチェック","dehydMouth":"おくちが乾いてる？","dehydMouthDesc":"くちびるや舌がカラカラ","dehydUrine":"おしっこが少ない？","dehydUrineDesc":"いつもより少ない・出ていない","dehydTears":"なみだが少ない？","dehydTearsDesc":"泣いてもなみだが出にくい","dehydEnergy":"ぐったりしてる？","dehydEnergyDesc":"元気がなく反応が鈍い","dehydVomit":"吐いている？","dehydVomitDesc":"何度も吐く・飲めても戻す","dehydDrink":"自分で飲めない？","dehydDrinkDesc":"うまく飲み込めない・飲めない","dehydSkin":"皮膚の戻りは？","dehydSkinDesc":"大人が軽くつまんで離す（参考）","dehydUnderarm":"わきが乾燥してる？","dehydUnderarmDesc":"汗の有無だけでは判断できない","dehydMark":"当てはまる","dehydCaution":"※ 皮膚の戻りやわきの乾燥だけで脱水症は判断できません。チェック数で重症度も決められません。","dehydAssess":"チェックしたサインを確認","dehydToStaff":"日本のスタッフに見せる","dehydAlert":"⚠️ すぐ大人・スタッフに伝えてください。意識がはっきりしない・反応がおかしい・けいれんがあるときは、直ちに119番へ。飲めない、ぐったりしている場合も速やかに医療機関の判断が必要です。","dehydConcern":"⚠️ 脱水を疑うサインがあります。涼しい場所で休んで、大人に伝え、症状に応じて医療機関に相談してください。","dehydNotice":"このサインだけで脱水症とは判断できません。ほかの症状も確認し、心配なら大人・医療機関に相談してね。","dehydNone":"チェックがなくても脱水症を否定できません。体調が悪ければ活動をやめ、涼しい場所で大人に相談してください。","aidVisualTitle":"具合が悪いときの4ステップ","aidStop":"遊びをやめる","aidStopDesc":"まず立ち止まろう","aidRest":"涼しい場所へ","aidRestDesc":"日陰・冷房のある室内","aidCool":"体を冷やす","aidCoolDesc":"濡れたタオル・保冷剤","aidCall":"大人に伝える","aidCallDesc":"危険な症状は119","dehydEmergency":"🚨 意識がおかしい・反応しない・けいれんがある場合は、すぐ119番。意識がはっきりしない人や飲み込めない人に無理に飲ませないでください。","fullExplanation":"詳しく読む（保護者向け）"},"en":{"visualTitle":"Learn heat safety with pictures","visualIntro":"Remember these four actions.","picCoolPlace":"Find shade","picCoolPlaceDesc":"Move somewhere cooler","picWater":"Drink regularly","picWaterDesc":"Before you feel thirsty","picCoolBody":"Cool your body","picCoolBodyDesc":"Cool the neck and armpits","picTellAdult":"Tell an adult","picTellAdultDesc":"If you feel unwell","dehydTitle":"Could it be dehydration?","dehydSubtitle":"Check signs together with an adult.","dehydMouth":"Dry mouth or lips?","dehydMouthDesc":"Mouth unusually dry","dehydUrine":"Less urine?","dehydUrineDesc":"Less often than usual","dehydTears":"Fewer tears?","dehydTearsDesc":"Few tears while crying","dehydEnergy":"Very tired or limp?","dehydEnergyDesc":"Unusually weak or slow to respond","dehydVomit":"Vomiting?","dehydVomitDesc":"Repeated vomiting","dehydDrink":"Unable to drink?","dehydDrinkDesc":"Cannot drink or swallow safely","dehydSkin":"Skin slow to return?","dehydSkinDesc":"Adult gently pinches skin (only a clue)","dehydUnderarm":"Dry armpits?","dehydUnderarmDesc":"Sweat alone is not a reliable sign","dehydMark":"Applies","dehydCaution":"Skin recoil and dry armpits cannot diagnose dehydration. The number of checks does not tell how serious it is.","dehydAssess":"Review checked signs","dehydToStaff":"Show Japanese staff","dehydAlert":"Tell an adult or staff member immediately. Confusion, seizures or unresponsiveness require 119. Being unable to drink or very limp also needs prompt medical help.","dehydConcern":"There may be signs of dehydration. Stop activity, move somewhere cool, tell an adult and seek medical advice as needed.","dehydNotice":"These signs alone do not diagnose dehydration. Look for other symptoms and get help if concerned.","dehydNone":"No checked signs does not rule out dehydration. If unwell, stop activity and tell an adult.","aidVisualTitle":"4 steps if feeling unwell","aidStop":"Stop playing","aidStopDesc":"Take a break immediately","aidRest":"Move somewhere cool","aidRestDesc":"Shade or air-conditioning","aidCool":"Cool the body","aidCoolDesc":"Wet towels and cold packs","aidCall":"Tell an adult","aidCallDesc":"Call 119 for danger signs","dehydEmergency":"Confusion, seizures or unresponsiveness: call 119. Never force drinks on someone who is not alert or cannot swallow.","fullExplanation":"More details (for parents)"},"ko":{"visualTitle":"그림으로 배우는 더위 대처법","visualIntro":"4가지 행동만 기억해요.","picCoolPlace":"그늘로 이동","picCoolPlaceDesc":"시원한 곳에 가요","picWater":"물 자주 마시기","picWaterDesc":"목마르기 전에","picCoolBody":"몸 식히기","picCoolBodyDesc":"목과 겨드랑이 식히기","picTellAdult":"어른에게 말하기","picTellAdultDesc":"몸이 안 좋다면 바로","dehydTitle":"탈수 신호가 있나요?","dehydSubtitle":"어른과 함께 확인하세요.","dehydMouth":"입술이 말랐나요?","dehydMouthDesc":"입 안이 평소보다 건조","dehydUrine":"소변이 줄었나요?","dehydUrineDesc":"평소보다 횟수·양 감소","dehydTears":"눈물이 적나요?","dehydTearsDesc":"울어도 눈물이 적음","dehydEnergy":"힘이 없나요?","dehydEnergyDesc":"축 처지거나 반응이 느림","dehydVomit":"토하고 있나요?","dehydVomitDesc":"반복되는 구토","dehydDrink":"스스로 못 마시나요?","dehydDrinkDesc":"안전하게 삼킬 수 없음","dehydSkin":"피부가 천천히 돌아오나요?","dehydSkinDesc":"어른이 가볍게 집었다 놓기(참고)","dehydUnderarm":"겨드랑이가 건조한가요?","dehydUnderarmDesc":"땀만으로는 판단 불가","dehydMark":"해당","dehydCaution":"피부·겨드랑이 상태만으로 탈수를 판단할 수 없고, 체크 개수로 중증도를 진단하지 않습니다.","dehydAssess":"체크한 신호 확인","dehydToStaff":"일본 직원에게 보여주기","dehydAlert":"즉시 어른이나 직원에게 알려요. 의식 이상·경련·무반응이면 119. 스스로 마시지 못하거나 축 처져 있다면 신속한 진료가 필요해요.","dehydConcern":"탈수 신호가 있을 수 있어요. 시원한 장소에서 쉬고 어른에게 알린 뒤 필요하면 진료받으세요.","dehydNotice":"이 신호만으로 탈수라고 단정할 수 없어요. 다른 증상도 살피고 걱정된다면 도움을 요청하세요.","dehydNone":"체크한 증상이 없어도 탈수가 아니라고 단정할 수 없어요. 몸이 안 좋으면 쉬고 어른에게 알리세요.","aidVisualTitle":"몸이 안 좋을 때 4단계","aidStop":"놀이 멈추기","aidStopDesc":"즉시 쉬어요","aidRest":"시원한 곳으로","aidRestDesc":"그늘이나 냉방 장소","aidCool":"몸 식히기","aidCoolDesc":"젖은 수건·냉찜질","aidCall":"어른에게 알리기","aidCallDesc":"위험 신호는 119","dehydEmergency":"의식 이상, 경련, 무반응이면 119. 의식이 흐리거나 삼키지 못하는 사람에게 억지로 물을 주지 마세요.","fullExplanation":"자세히 보기 (보호자용)"},"zh-CN":{"visualTitle":"看图学习防暑","visualIntro":"记住四个简单动作。","picCoolPlace":"去阴凉处","picCoolPlaceDesc":"转移到凉爽的地方","picWater":"经常喝水","picWaterDesc":"不要等到口渴","picCoolBody":"给身体降温","picCoolBodyDesc":"冷却颈部和腋下","picTellAdult":"告诉大人","picTellAdultDesc":"感觉不舒服时","dehydTitle":"是否有脱水迹象？","dehydSubtitle":"请和家长一起检查。","dehydMouth":"嘴巴干吗？","dehydMouthDesc":"嘴唇和口腔很干","dehydUrine":"尿变少了吗？","dehydUrineDesc":"比平时少","dehydTears":"眼泪变少？","dehydTearsDesc":"哭时眼泪较少","dehydEnergy":"异常疲倦？","dehydEnergyDesc":"无力或反应迟钝","dehydVomit":"呕吐？","dehydVomitDesc":"反复呕吐","dehydDrink":"无法自行喝水？","dehydDrinkDesc":"不能安全吞咽","dehydSkin":"皮肤恢复得慢？","dehydSkinDesc":"家长轻捏皮肤（仅供参考）","dehydUnderarm":"腋下很干？","dehydUnderarmDesc":"不能仅凭出汗判断","dehydMark":"符合","dehydCaution":"仅凭皮肤弹性或腋下干燥不能诊断脱水。勾选数量也不能表示严重程度。","dehydAssess":"查看勾选结果","dehydToStaff":"出示给日本工作人员","dehydAlert":"请立即告诉家长或工作人员。意识异常、抽搐或无反应应立即拨打119。无法喝水或非常虚弱也需及时就医。","dehydConcern":"可能有脱水迹象。停止活动、到凉爽处休息并告知大人，必要时就医。","dehydNotice":"单凭这些迹象无法诊断脱水。如有疑虑，请寻求帮助。","dehydNone":"没有勾选也不能排除脱水。如有不适，停止活动并告诉大人。","aidVisualTitle":"身体不舒服时的4步","aidStop":"停止玩耍","aidStopDesc":"立即休息","aidRest":"去凉爽处","aidRestDesc":"阴凉处或空调房","aidCool":"给身体降温","aidCoolDesc":"湿毛巾和冰袋","aidCall":"告诉大人","aidCallDesc":"危险症状拨打119","dehydEmergency":"意识异常、抽搐或无反应时立即拨打119。不要强迫意识不清或无法吞咽的人喝水。","fullExplanation":"查看详细说明（家长）"},"zh-TW":{"visualTitle":"看圖學習防暑","visualIntro":"記住四個簡單步驟。","picCoolPlace":"去陰涼處","picCoolPlaceDesc":"移到涼爽的地方","picWater":"經常喝水","picWaterDesc":"別等到口渴","picCoolBody":"讓身體降溫","picCoolBodyDesc":"冷卻頸部和腋下","picTellAdult":"告訴大人","picTellAdultDesc":"感到不舒服時","dehydTitle":"是否有脫水跡象？","dehydSubtitle":"請和家長一起檢查。","dehydMouth":"嘴巴乾嗎？","dehydMouthDesc":"嘴唇和口腔很乾","dehydUrine":"尿變少了嗎？","dehydUrineDesc":"比平常少","dehydTears":"眼淚變少？","dehydTearsDesc":"哭時眼淚較少","dehydEnergy":"異常疲倦？","dehydEnergyDesc":"無力或反應遲鈍","dehydVomit":"嘔吐？","dehydVomitDesc":"反覆嘔吐","dehydDrink":"無法自行喝水？","dehydDrinkDesc":"無法安全吞嚥","dehydSkin":"皮膚回彈很慢？","dehydSkinDesc":"家長輕捏皮膚（僅供參考）","dehydUnderarm":"腋下很乾？","dehydUnderarmDesc":"不能只憑流汗判斷","dehydMark":"符合","dehydCaution":"僅憑皮膚彈性或腋下乾燥不能診斷脫水。勾選數量也無法表示嚴重程度。","dehydAssess":"查看勾選結果","dehydToStaff":"出示給日本工作人員","dehydAlert":"請立即告訴家長或工作人員。意識異常、抽搐或無反應時立即撥打119。無法喝水或極度虛弱時也需要盡速就醫。","dehydConcern":"可能有脫水跡象。停止活動、到涼爽處休息並告知大人，必要時就醫。","dehydNotice":"單憑這些跡象無法診斷脫水。若有疑慮請尋求協助。","dehydNone":"沒有勾選也不能排除脫水。身體不適時請停止活動並告知大人。","aidVisualTitle":"身體不舒服時的4步","aidStop":"停止玩耍","aidStopDesc":"立刻休息","aidRest":"去涼爽處","aidRestDesc":"陰涼處或冷氣房","aidCool":"幫身體降溫","aidCoolDesc":"濕毛巾和冰袋","aidCall":"告訴大人","aidCallDesc":"危險症狀請撥119","dehydEmergency":"意識異常、抽搐或無反應時請立即撥打119。不要強迫意識不清或無法吞嚥的人喝水。","fullExplanation":"查看詳細說明（家長）"},"fr":{"visualTitle":"Protégeons-nous de la chaleur, en images","visualIntro":"Quatre gestes essentiels.","picCoolPlace":"À l'ombre","picCoolPlaceDesc":"Va dans un endroit frais","picWater":"Boire souvent","picWaterDesc":"Avant d'avoir soif","picCoolBody":"Se rafraîchir","picCoolBodyDesc":"Refroidis le cou et les aisselles","picTellAdult":"Prévenir un adulte","picTellAdultDesc":"En cas de malaise","dehydTitle":"Des signes de déshydratation ?","dehydSubtitle":"Vérifie avec un adulte.","dehydMouth":"Bouche sèche ?","dehydMouthDesc":"Bouche ou lèvres très sèches","dehydUrine":"Moins d'urine ?","dehydUrineDesc":"Moins souvent que d'habitude","dehydTears":"Peu de larmes ?","dehydTearsDesc":"Peu de larmes en pleurant","dehydEnergy":"Très faible ?","dehydEnergyDesc":"Épuisement ou réactions lentes","dehydVomit":"Vomissements ?","dehydVomitDesc":"Vomissements répétés","dehydDrink":"Ne peut pas boire ?","dehydDrinkDesc":"Ne peut pas avaler sans risque","dehydSkin":"Peau qui revient lentement ?","dehydSkinDesc":"Pincement léger par un adulte (indice seulement)","dehydUnderarm":"Aisselles sèches ?","dehydUnderarmDesc":"La transpiration seule ne suffit pas","dehydMark":"Oui","dehydCaution":"Ni le pli cutané ni les aisselles sèches ne permettent de diagnostiquer une déshydratation. Le nombre de cases cochées n'indique pas la gravité.","dehydAssess":"Voir les signes cochés","dehydToStaff":"Montrer au personnel japonais","dehydAlert":"Préviens immédiatement un adulte ou le personnel. Confusion, convulsions ou absence de réaction : appelle le 119. Si la personne ne peut pas boire ou est très faible, consulte rapidement.","dehydConcern":"Il peut y avoir des signes de déshydratation. Arrête l'activité, va au frais, préviens un adulte et consulte si nécessaire.","dehydNotice":"Ces signes seuls ne permettent pas de diagnostiquer une déshydratation. Demande de l'aide si tu as un doute.","dehydNone":"L'absence de cases cochées n'exclut pas la déshydratation. Si tu te sens mal, arrête-toi et préviens un adulte.","aidVisualTitle":"4 gestes si l'on se sent mal","aidStop":"Arrêter de jouer","aidStopDesc":"Faire une pause immédiatement","aidRest":"Aller au frais","aidRestDesc":"Ombre ou climatisation","aidCool":"Refroidir le corps","aidCoolDesc":"Serviettes humides et poches froides","aidCall":"Prévenir un adulte","aidCallDesc":"119 en cas de signes graves","dehydEmergency":"Confusion, convulsions ou absence de réaction : appelle le 119. Ne force jamais à boire une personne peu consciente ou qui ne peut pas avaler.","fullExplanation":"Plus de détails (pour les parents)"},"es":{"visualTitle":"Aprende a protegerte del calor con dibujos","visualIntro":"Recuerda cuatro acciones.","picCoolPlace":"Busca sombra","picCoolPlaceDesc":"Ve a un lugar fresco","picWater":"Bebe a menudo","picWaterDesc":"Antes de tener sed","picCoolBody":"Enfría el cuerpo","picCoolBodyDesc":"Cuello y axilas","picTellAdult":"Avisa a un adulto","picTellAdultDesc":"Si te encuentras mal","dehydTitle":"¿Hay señales de deshidratación?","dehydSubtitle":"Compruébalas con una persona adulta.","dehydMouth":"¿Boca seca?","dehydMouthDesc":"Labios o boca muy secos","dehydUrine":"¿Menos orina?","dehydUrineDesc":"Menos de lo normal","dehydTears":"¿Pocas lágrimas?","dehydTearsDesc":"Pocas lágrimas al llorar","dehydEnergy":"¿Muy débil?","dehydEnergyDesc":"Decaído o responde lentamente","dehydVomit":"¿Vómitos?","dehydVomitDesc":"Vómitos repetidos","dehydDrink":"¿No puede beber?","dehydDrinkDesc":"No puede tragar con seguridad","dehydSkin":"¿La piel vuelve lentamente?","dehydSkinDesc":"Un adulto pellizca suavemente (solo una pista)","dehydUnderarm":"¿Axilas secas?","dehydUnderarmDesc":"El sudor solo no basta para valorar","dehydMark":"Sí","dehydCaution":"La piel o las axilas secas no diagnostican deshidratación. El número de casillas no indica la gravedad.","dehydAssess":"Revisar las señales","dehydToStaff":"Mostrar al personal japonés","dehydAlert":"Avisa de inmediato a un adulto o al personal. Confusión, convulsiones o falta de respuesta: llama al 119. Si no puede beber o está muy débil, necesita valoración médica rápida.","dehydConcern":"Puede haber señales de deshidratación. Detén la actividad, busca un lugar fresco, avisa a un adulto y consulta si hace falta.","dehydNotice":"Estas señales por sí solas no diagnostican deshidratación. Pide ayuda si tienes dudas.","dehydNone":"No marcar ninguna casilla no descarta deshidratación. Si te encuentras mal, detente y avisa a un adulto.","aidVisualTitle":"4 pasos si te encuentras mal","aidStop":"Deja de jugar","aidStopDesc":"Descansa enseguida","aidRest":"Ve a un lugar fresco","aidRestDesc":"Sombra o aire acondicionado","aidCool":"Enfría el cuerpo","aidCoolDesc":"Toallas húmedas y compresas frías","aidCall":"Avisa a un adulto","aidCallDesc":"119 ante señales graves","dehydEmergency":"Confusión, convulsiones o falta de respuesta: llama al 119. No fuerces a beber a alguien con conciencia alterada o que no puede tragar.","fullExplanation":"Más detalles (para padres)"}}).forEach(([code,labels])=>Object.assign(dictionary[code],labels));
 Object.entries({"ja":{"quizKids":"🧒 こども","quizMiddle":"🧩 ふつう","quizParents":"👨‍👩‍👧 おとな","quizInvite":"むずかしかったら、おとなと一緒に挑戦してね！","quizAward":"正解！ 💧+{n}","quizAlready":"この問題の水滴はもうもらったよ。"},"en":{"quizKids":"🧒 Kids","quizMiddle":"🧩 Intermediate","quizParents":"👨‍👩‍👧 Parents","quizInvite":"Too hard? Ask a parent to solve it with you!","quizAward":"Correct! 💧+{n}","quizAlready":"Drops already earned for this question."},"ko":{"quizKids":"🧒 어린이","quizMiddle":"🧩 중간","quizParents":"👨‍👩‍👧 부모","quizInvite":"어려우면 부모님이랑 같이 풀어봐!","quizAward":"정답! 💧+{n}","quizAlready":"이 문제의 물방울은 이미 받았어요."},"zh-CN":{"quizKids":"🧒 儿童","quizMiddle":"🧩 中级","quizParents":"👨‍👩‍👧 家长","quizInvite":"觉得难？和家长一起挑战！","quizAward":"答对了！💧+{n}","quizAlready":"这道题的奖励已获得。"},"zh-TW":{"quizKids":"🧒 兒童","quizMiddle":"🧩 中級","quizParents":"👨‍👩‍👧 家長","quizInvite":"太難了？和家長一起挑戰！","quizAward":"答對了！💧+{n}","quizAlready":"這題的獎勵已領取。"},"fr":{"quizKids":"🧒 Enfants","quizMiddle":"🧩 Intermédiaire","quizParents":"👨‍👩‍👧 Parents","quizInvite":"Trop difficile ? Demande à un parent de jouer !","quizAward":"Bravo ! 💧+{n}","quizAlready":"Gouttes déjà gagnées pour cette question."},"es":{"quizKids":"🧒 Niños","quizMiddle":"🧩 Intermedio","quizParents":"👨‍👩‍👧 Padres","quizInvite":"¿Demasiado difícil? ¡Pide ayuda a tus padres!","quizAward":"¡Correcto! 💧+{n}","quizAlready":"Ya ganaste las gotas de esta pregunta."}}).forEach(([language,labels])=>Object.assign(dictionary[language],labels));
-Object.entries({"ja":{"petDog":"いぬ","petCat":"ねこ","petRabbit":"うさぎ","petSquirrel":"りす","petEvoTitle":"レベル3！どうぶつに進化！","petEvoIntro":"好きなどうぶつを選ぼう。あとで変えられるよ。","petEvoSteps":"Lv.3 どうぶつの姿 → Lv.4 しっぽ・模様 → Lv.5 リボン → Lv.6 キラキラ","petAlbumTitle":"🐾 レベル3からのどうぶつ進化","petAlbumDesc":"10滴でどうぶつに進化！15滴、20滴、25滴でも姿が変わるよ。","petChoice":"えらんだのは {animal}！ レベル{level}"},"en":{"petDog":"Dog","petCat":"Cat","petRabbit":"Rabbit","petSquirrel":"Squirrel","petEvoTitle":"Level 3! Animal evolution!","petEvoIntro":"Choose your animal. You can change it later.","petEvoSteps":"Lv3 Animal → Lv4 Tail & pattern → Lv5 Ribbon → Lv6 Sparkle","petAlbumTitle":"🐾 Animal evolution from level 3","petAlbumDesc":"Transform at 10 drops, then grow new details at 15, 20 and 25 drops.","petChoice":"{animal} · Level {level}"},"ko":{"petDog":"강아지","petCat":"고양이","petRabbit":"토끼","petSquirrel":"다람쥐","petEvoTitle":"레벨 3! 동물로 진화!","petEvoIntro":"좋아하는 동물을 선택해요. 나중에 바꿀 수 있어요.","petEvoSteps":"Lv3 동물 → Lv4 꼬리·무늬 → Lv5 리본 → Lv6 반짝반짝","petAlbumTitle":"🐾 레벨 3부터 동물 진화","petAlbumDesc":"물방울 10개에 동물로! 15·20·25개에도 모습이 변해요.","petChoice":"{animal} 선택! 레벨 {level}"},"zh-CN":{"petDog":"狗狗","petCat":"猫咪","petRabbit":"兔子","petSquirrel":"松鼠","petEvoTitle":"等级3！进化成动物！","petEvoIntro":"选择喜欢的动物，以后可以更换。","petEvoSteps":"Lv3 动物 → Lv4 尾巴花纹 → Lv5 蝴蝶结 → Lv6 闪亮","petAlbumTitle":"🐾 等级3开始的动物进化","petAlbumDesc":"喂10滴变成动物！15、20、25滴也会进化。","petChoice":"已选择{animal}！等级{level}"},"zh-TW":{"petDog":"狗狗","petCat":"貓咪","petRabbit":"兔子","petSquirrel":"松鼠","petEvoTitle":"等級3！進化成動物！","petEvoIntro":"選擇喜歡的動物，以後也能更換。","petEvoSteps":"Lv3 動物 → Lv4 尾巴花紋 → Lv5 蝴蝶結 → Lv6 閃亮","petAlbumTitle":"🐾 等級3開始的動物進化","petAlbumDesc":"餵10滴變成動物！15、20、25滴也會進化。","petChoice":"已選擇{animal}！等級{level}"},"fr":{"petDog":"Chien","petCat":"Chat","petRabbit":"Lapin","petSquirrel":"Écureuil","petEvoTitle":"Niveau 3 ! Évolution animale !","petEvoIntro":"Choisis ton animal, tu pourras le changer.","petEvoSteps":"Niv3 Animal → Niv4 Queue → Niv5 Ruban → Niv6 Étincelles","petAlbumTitle":"🐾 Évolution animale dès le niveau 3","petAlbumDesc":"Évolue après 10 gouttes, puis change à 15, 20 et 25.","petChoice":"{animal} choisi ! Niveau {level}"},"es":{"petDog":"Perro","petCat":"Gato","petRabbit":"Conejo","petSquirrel":"Ardilla","petEvoTitle":"¡Nivel 3! Evolución animal","petEvoIntro":"Elige tu animal. Podrás cambiarlo después.","petEvoSteps":"Nv3 Animal → Nv4 Cola → Nv5 Lazo → Nv6 Brillos","petAlbumTitle":"🐾 Evolución animal desde el nivel 3","petAlbumDesc":"Se transforma con 10 gotas y evoluciona a 15, 20 y 25.","petChoice":"¡{animal} elegido! Nivel {level}"}}).forEach(([code,labels])=>Object.assign(dictionary[code],labels));
-Object.entries({"ja":{"petTapDog":["わん！いっしょにおさんぽ！","おみず、のみたいな♪","しっぽ、ふりふり！"],"petTapCat":["にゃ〜。ひかげがすき。","なでてくれるの？","ごろごろ、ひとやすみ。"],"petTapRabbit":["ぴょん！みずのみタイム！","おみみがぴくぴく！","すずしいとこ、どこかな？"],"petTapSquirrel":["どんぐりみーつけた！","こまめにおみず！","ちょこちょこ、ひとやすみ！"]},"en":{"petTapDog":["Woof! Let's explore!","Water break, please!","Happy tail wag!"],"petTapCat":["Meow... I love the shade.","A little pat?","Purr... time to rest."],"petTapRabbit":["Hop! Water break!","My ears are twitching!","Where is a cool place?"],"petTapSquirrel":["I found an acorn!","Drink regularly!","Tiny steps, tiny breaks!"]},"ko":{"petTapDog":["멍멍! 산책 가자!","물 마실 시간이야!","꼬리 살랑살랑!"],"petTapCat":["야옹~ 그늘이 좋아.","쓰다듬어 줄래?","골골... 잠깐 쉬자."],"petTapRabbit":["깡총! 물 마시자!","귀가 쫑긋!","시원한 곳 어디지?"],"petTapSquirrel":["도토리 찾았다!","물 자주 마셔!","조금씩 쉬어 가자!"]},"zh-CN":{"petTapDog":["汪汪！去散步！","到喝水时间啦！","摇摇尾巴！"],"petTapCat":["喵～我喜欢阴凉处。","摸摸我好吗？","呼噜～休息一下。"],"petTapRabbit":["跳跳！喝水啦！","耳朵动起来！","哪里凉快呢？"],"petTapSquirrel":["找到橡果啦！","记得常喝水！","走走停停，休息一下！"]},"zh-TW":{"petTapDog":["汪汪！去散步！","喝水時間到！","搖搖尾巴！"],"petTapCat":["喵～我喜歡陰涼處。","摸摸我好嗎？","呼嚕～休息一下。"],"petTapRabbit":["跳跳！喝水啦！","耳朵動起來！","哪裡比較涼爽？"],"petTapSquirrel":["找到橡果啦！","記得常喝水！","走走停停休息一下！"]},"fr":{"petTapDog":["Ouaf ! On se promène ?","Petite pause pour boire !","Ma queue remue !"],"petTapCat":["Miaou... j'aime l'ombre.","Une caresse ?","Ronron... pause fraîche."],"petTapRabbit":["Hop ! Pause eau !","Mes oreilles bougent !","Où est l'ombre ?"],"petTapSquirrel":["J'ai trouvé un gland !","Bois régulièrement !","Petites pauses !"]},"es":{"petTapDog":["¡Guau! ¡Vamos de paseo!","¡Hora de beber agua!","¡Muevo la cola!"],"petTapCat":["Miau... me gusta la sombra.","¿Me acaricias?","Ronroneo... a descansar."],"petTapRabbit":["¡Salto! ¡A beber agua!","¡Se mueven mis orejas!","¿Dónde hay sombra?"],"petTapSquirrel":["¡Encontré una bellota!","¡Bebe agua a menudo!","¡Descansos cortitos!"]}}).forEach(([lang,lines])=>Object.assign(dictionary[lang],lines));
-Object.entries({"ja":{"albumSub":"水滴5個で進化、10個で動物へ！15・20・25個でも姿が変わるよ。"},"en":{"albumSub":"Evolve at 5 drops, choose an animal at 10, and grow again at 15, 20 and 25."},"ko":{"albumSub":"물방울 5개에 진화, 10개에 동물로! 15·20·25개에도 변해요."},"zh-CN":{"albumSub":"5滴进化，10滴变动物！15、20、25滴也会变化。"},"zh-TW":{"albumSub":"5滴進化，10滴變動物！15、20、25滴也會變化。"},"fr":{"albumSub":"Évolue après 5 gouttes, devient un animal après 10, puis change à 15, 20 et 25."},"es":{"albumSub":"Evoluciona con 5 gotas, se convierte en animal con 10 y cambia a las 15, 20 y 25."}}).forEach(([lang,copy])=>Object.assign(dictionary[lang],copy));
 const safeGet=(key)=>{try{return localStorage.getItem(key)}catch(e){return null}};
 const safeSet=(key,val)=>{try{localStorage.setItem(key,val)}catch(e){}};
 let lang=safeGet('wbgt-lang')||'ja';
@@ -787,7 +753,6 @@ if(!dictionary[lang])lang='ja';
 const fresh=()=>({stock:{water:0,ion:0,cool:0,quiz:0},fed:{water:0,ion:0,cool:0,quiz:0},seen:[],quizSeen:[],discovered:[],enabled:false});
 let state;try{state=JSON.parse(safeGet('wbgt-progress'))||fresh()}catch(e){state=fresh()}
 state.discovered = state.discovered || [];
-if(!['dog','cat','rabbit','squirrel'].includes(state.petAnimal))state.petAnimal=null;
 const allTypes=['water','ion','cool','quiz'];
 // Only for the opt-in summer demo; never interpreted as the user's real location.
 const simStages=[{wbgt:22,key:'simStage0'},{wbgt:26,key:'simStage1'},{wbgt:29,key:'simStage2'},{wbgt:32,key:'simStage3'}];
@@ -856,62 +821,10 @@ const save=()=>safeSet('wbgt-progress',JSON.stringify(state));
 function toast(msg){$('toast').textContent=msg;$('toast').classList.add('visible');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),3000)}
 function fedTotal(){return Object.values(state.fed).reduce((a,b)=>a+b,0)}
 function form(){let n=fedTotal();if(n<5)return 'base';let max=Math.max(...allTypes.map(k=>state.fed[k]));return allTypes.find(k=>state.fed[k]===max)||'water'}
-const animalKinds=['dog','cat','rabbit','squirrel'];
-const defaultSpeciesByDrop={water:'dog',ion:'cat',cool:'rabbit',quiz:'squirrel',base:'dog'};
-const animalEmoji={dog:'🐶',cat:'🐱',rabbit:'🐰',squirrel:'🐿️'};
-const animalLabel={dog:'petDog',cat:'petCat',rabbit:'petRabbit',squirrel:'petSquirrel'};
-function petSpecies(){return fedTotal()>=10 ? (state.petAnimal||defaultSpeciesByDrop[form()]||'dog') : null}
-function animalDetails(animal,level,c1,c2){
- let back='',front='';
- if(animal==='dog'){
-  back=`<path d="M70 46Q46 21 40 49Q41 70 56 73L67 51Z" fill="${c2}" stroke="#6797a9" stroke-width="3"/><path d="M150 45Q172 26 184 50Q189 67 163 76Z" fill="${c2}" stroke="#6797a9" stroke-width="3"/>`;
-  front='<ellipse cx="112" cy="95" rx="7" ry="4" fill="#4a5c68"/>';
- }else if(animal==='cat'){
-  back=`<path d="M73 55L66 12L102 34Z M128 33L164 10L159 57Z" fill="${c2}" stroke="#6797a9" stroke-width="3" stroke-linejoin="round"/><path d="M76 45L73 23L91 36Z M141 36L157 21L153 45Z" fill="#f7b4c3"/>`;
-  front='<path d="M73 99L95 103M75 111L95 110M128 104L151 99M129 110L151 114" stroke="#507c8a" stroke-width="2" stroke-linecap="round"/><path d="M105 95L112 100L119 95Z" fill="#e58da4"/>';
- }else if(animal==='rabbit'){
-  back=`<path d="M84 42Q70 6 81 2Q99 -3 102 44Z M123 43Q129 6 144 5Q155 10 142 47Z" fill="${c1}" stroke="#6797a9" stroke-width="3"/><path d="M87 36L84 14M138 37L143 15" stroke="#f3a4b8" stroke-width="6" stroke-linecap="round"/>`;
-  front='<rect x="108" y="111" width="6" height="9" rx="2" fill="#fff" stroke="#9c9c9c" stroke-width="1"/><rect x="114" y="111" width="6" height="9" rx="2" fill="#fff" stroke="#9c9c9c" stroke-width="1"/>';
- }else if(animal==='squirrel'){
-  back=`<path d="M158 128C184 146 206 127 195 98Q187 80 171 94Q186 102 172 113Q170 91 155 97Z" fill="${c2}" stroke="#6797a9" stroke-width="3"/><circle cx="76" cy="36" r="17" fill="${c2}" stroke="#6797a9" stroke-width="3"/><circle cx="152" cy="36" r="17" fill="${c2}" stroke="#6797a9" stroke-width="3"/>`;
-  front='<circle cx="70" cy="94" r="3" fill="#cc8597"/><circle cx="154" cy="94" r="3" fill="#cc8597"/>';
- }
- if(level>=4){
-  back+=`<path d="M48 130Q34 142 42 151" fill="none" stroke="${c2}" stroke-width="7" stroke-linecap="round"/>`;
-  front+='<path d="M90 130Q111 140 132 130" fill="none" stroke="#fff" stroke-width="5" opacity=".7"/>';
- }
- if(level>=5){
-  front+='<path d="M92 135Q111 142 132 135" fill="none" stroke="#6ab7cc" stroke-width="7" stroke-linecap="round"/><path d="M109 137L93 150L103 151L112 141L121 151L132 149L115 137" fill="#f4abbd" stroke="#d58fa5" stroke-width="1"/>';
- }
- if(level>=6){
-  front+='<path d="M169 27L173 19L177 27L186 30L178 35L173 44L169 35L161 31Z" fill="#fce18b" stroke="#d2b857" stroke-width="1.5"/>';
- }
- return {back,front};
-}
-function renderPetEvolution(){
- const total=fedTotal(),level=Math.floor(total/5)+1,animal=petSpecies();
- const panel=$('petEvolution');panel.classList.toggle('hidden',level<3);
- if(level>=3&&animal){
-  $('petEvoInfo').textContent=t('petChoice').replace('{animal}',t(animalLabel[animal])).replace('{level}',String(level));
- }
- document.querySelectorAll('[data-pet-animal]').forEach(btn=>{
-  btn.setAttribute('aria-pressed',String(level>=3&&btn.dataset.petAnimal===animal));
- });
- const album=$('petAlbumGrid');
- album.innerHTML=animalKinds.map(k=>{
-  const selected=animal===k,unlocked=level>=3;
-  return `<div class="pet-album-item ${selected?'':'unselected'}"><span>${animalEmoji[k]}</span><b>${escapeHTML(t(animalLabel[k]))}</b><small>${selected?'✓ '+t('level')+' '+level:unlocked?'⋆':'🔒'}</small></div>`;
- }).join('');
-}
-document.querySelectorAll('[data-pet-animal]').forEach(btn=>btn.addEventListener('click',()=>{
- if(fedTotal()<10)return;
- state.petAnimal=btn.dataset.petAnimal;save();tapIndex=0;draw();
-}));
 function avatarSVG(game=false){
  const f=form(),level=Math.floor(fedTotal()/5)+1;
  const palette={base:['#fff5be','#f5d17d'],water:['#d4f5ff','#70cbf2'],ion:['#fff0b4','#f7bc56'],cool:['#caf8e7','#61cba9'],quiz:['#eddafa','#bb91e4']};
  const [c1,c2]=palette[f],advanced=f!=='base';
- const animal=petSpecies(),parts=animal?animalDetails(animal,level,c1,c2):{back:'',front:''};
  const reacting=game&&simIndex>=1&&!simProtected;
  const severe=reacting&&simIndex===3;
  const tap=game?(tapIndex%3):0;
@@ -929,7 +842,6 @@ function avatarSVG(game=false){
  <ellipse cx="110" cy="172" rx="59" ry="11" fill="#5a929f" opacity=".13"/>
  <defs><linearGradient id="bodyGradient" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
  <g transform="${severe?'translate(0 36) scale(1 .79)':''}">
- ${parts.back}
  <path d="M62 87Q54 43 85 36Q105 15 133 32Q172 25 169 71Q185 107 161 143Q147 159 130 151Q110 160 92 151Q61 158 55 124Z" fill="url(#bodyGradient)" stroke="#77b2bd" stroke-width="3" stroke-linejoin="round"/>
  <path d="M67 135Q40 135 32 114" fill="none" stroke="#77b2bd" stroke-width="8" stroke-linecap="round"/>
  <path d="M158 132Q182 137 187 111" fill="none" stroke="#77b2bd" stroke-width="8" stroke-linecap="round"/>
@@ -938,10 +850,9 @@ function avatarSVG(game=false){
  ${eyes}
  ${mouth}
  ${sweat}
- ${parts.front}
  <path d="M94 150Q88 168 98 168 M132 150Q126 168 137 168" fill="none" stroke="#77b2bd" stroke-width="8" stroke-linecap="round"/>
- ${advanced&&level<3?`<path d="M85 40Q105 17 133 32" fill="none" stroke="#fff" stroke-width="6" opacity=".65"/>${item}`:''}
- ${level>=6?'<circle cx="164" cy="44" r="8" fill="#f5dc77" stroke="#c5a357" stroke-width="2"/>':''}
+ ${advanced?`<path d="M85 40Q105 17 133 32" fill="none" stroke="#fff" stroke-width="6" opacity=".65"/>${item}`:''}
+ ${level>2?'<circle cx="164" cy="44" r="8" fill="#f5dc77" stroke="#c5a357" stroke-width="2"/>':''}
  </g>
  </svg>`}
 const visitorControls={"ja":{"backStaff":"← 症状チェックに戻る","printStaff":"この画面を印刷・保存する","callStaff":"緊急時：119番について確認する"},"en":{"backStaff":"← Back to symptom check","printStaff":"Print / save this screen","callStaff":"Emergency: 119 information"},"ko":{"backStaff":"← 증상 체크로 돌아가기","printStaff":"화면 인쇄 / 저장","callStaff":"긴급 상황: 119 안내"},"zh-CN":{"backStaff":"← 返回症状检查","printStaff":"打印 / 保存此画面","callStaff":"紧急情况：119"},"zh-TW":{"backStaff":"← 返回症狀檢查","printStaff":"列印 / 儲存畫面","callStaff":"緊急情況：119"},"fr":{"backStaff":"← Retour aux symptômes","printStaff":"Imprimer / enregistrer","callStaff":"Urgence : informations sur le 119"},"es":{"backStaff":"← Volver a los síntomas","printStaff":"Imprimir / guardar","callStaff":"Emergencia: información sobre el 119"}};
@@ -1006,7 +917,6 @@ function draw(){
  const forms=[['base','🌱','menuBase'],['water','💦','menuWater'],['ion','⚡','menuIon'],['cool','❄️','menuCool'],['quiz','🧠','menuQuiz']];
  $('albumGrid').innerHTML=forms.map(([type,sym,name])=>{const unlocked=type==='base'||state.discovered.includes(type);return `<div class="album-card"><div class="aicon" style="filter:${unlocked?'none':'grayscale(1)'};opacity:${unlocked?'1':'.34'}">${sym}</div><strong>${t(name)}</strong><div class="small">${unlocked?t('unlocked'):t('locked')}</div></div>`}).join('');
  renderQuiz();
- renderPetEvolution();
 }
 
 function renderGameReaction(){
@@ -1026,11 +936,7 @@ function renderGameReaction(){
  else if(simIndex===3)words=tapIndex===0?t('simDanger'):t('simTapDanger')[(tapIndex-1)%t('simTapDanger').length];
  else if(simIndex===2)words=tapIndex===0?t('simHot'):t('simTapHot')[(tapIndex-1)%t('simTapHot').length];
  else if(simIndex===1)words=tapIndex===0?t('simWarm'):t('simTapWarm')[(tapIndex-1)%t('simTapWarm').length];
- else{
-  const a=petSpecies(),lines=a?t('petTap'+a[0].toUpperCase()+a.slice(1)):null;
-  const reactions=Array.isArray(lines)?lines:p;
-  words=tapIndex===0?(fedTotal()===0?t('hello'):t('happy')):reactions[(tapIndex-1)%reactions.length];
- }
+ else words=tapIndex===0?(fedTotal()===0?t('hello'):t('happy')):p[(tapIndex-1)%p.length];
  $('speech').textContent=words;
  $('avatar').setAttribute('aria-label',t('tapHint'));
  $('simPanel').classList.toggle('hidden',$('simToggle').getAttribute('aria-expanded')!=='true');
