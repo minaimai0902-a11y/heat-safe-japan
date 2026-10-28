@@ -18,7 +18,7 @@ button,input,select{font:inherit} button{cursor:pointer;border:0}
 .brand{font-weight:900;letter-spacing:-.5px;color:#267c98;font-size:18px}.brand span{font-size:21px}
 .head-btn{padding:8px 10px;background:#edf8fb;border-radius:11px;color:#3b7182;font-size:12px;font-weight:800}
 .lang{background:#edf8fb;border:0;border-radius:11px;padding:9px;color:#27566a;font-size:12px}
-main{padding:5px 19px 108px}.screen{display:none;animation:fade .23s ease}.screen.active{display:block}@keyframes fade{from{opacity:.25;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+main{padding:5px 19px calc(110px + env(safe-area-inset-bottom, 0px))}.screen{display:none;animation:fade .23s ease}.screen.active{display:block}@keyframes fade{from{opacity:.25;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 .eyebrow{text-transform:uppercase;letter-spacing:1px;font-size:11px;font-weight:900;color:#4a9ab1;margin-bottom:5px}
 .title{font-size:25px;font-weight:950;line-height:1.3;margin:0 0 7px;letter-spacing:-.8px}
 .sub{font-size:13px;color:var(--muted);line-height:1.65;margin:0 0 18px}
@@ -53,7 +53,7 @@ main{padding:5px 19px 108px}.screen{display:none;animation:fade .23s ease}.scree
 .choice{width:100%;border:1px solid var(--border);background:#fff;border-radius:13px;padding:13px;text-align:left;color:var(--ink);font-weight:700;margin:5px 0}
 .choice:focus,.choice:hover{border-color:#7bcadf;background:#f3fcff}
 .input{width:100%;border:1px solid #c9e2e7;border-radius:12px;padding:12px;font-size:14px;margin:9px 0}
-.nav{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#fff;border-top:1px solid var(--border);padding:10px 5px 14px;box-shadow:0 -5px 20px rgba(40,100,120,.045)}
+.nav{position:fixed;bottom:0;left:50%;right:auto;transform:translateX(-50%);width:min(100%,430px);z-index:15;display:flex;justify-content:space-around;background:#fff;border-top:1px solid var(--border);padding:10px 5px calc(14px + env(safe-area-inset-bottom, 0px));box-shadow:0 -5px 20px rgba(40,100,120,.10)}
 .nav button{background:none;color:#8faab2;display:flex;align-items:center;flex-direction:column;gap:3px;font-weight:850;font-size:10px;min-width:67px}
 .nav button span{font-size:21px}.nav button.active{color:#289cb7}
 .overlay{z-index:30;position:absolute;inset:0;background:linear-gradient(152deg,#d0f8ff 0%,#f9fffb 78%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:33px;text-align:center}
