@@ -70,9 +70,18 @@ main{padding:5px 19px 108px}.screen{display:none;animation:fade .23s ease}.scree
 .modal{position:absolute;inset:0;z-index:20;background:#21444c73;display:none;align-items:center;justify-content:center;padding:20px}
 .modal.show{display:flex}.modal-content{width:100%;background:#fff;border-radius:22px;padding:21px;text-align:center;box-shadow:var(--shadow);max-height:80vh;overflow-y:auto}
 .modal-content h2{font-size:20px;margin:7px 0}.modal-content p{font-size:13px;color:#63838e;line-height:1.7}
-.grid-album{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
-.album-card{background:#fff;border-radius:15px;padding:15px;text-align:center;border:1px solid var(--border)}
-.album-card .aicon{font-size:45px;margin:4px 0 9px}.album-card strong{font-size:12px;display:block}.album-card .small{margin-top:4px}
+.grid-album{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.album-card{min-width:0;background:#fff;border-radius:16px;padding:10px;text-align:center;border:1px solid var(--border)}
+.album-card .album-portrait{height:140px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:13px;background:linear-gradient(145deg,#ebfafc,#f8f5ff);margin-bottom:10px}
+.album-card .album-portrait svg{width:100%;max-width:185px;height:133px;display:block}
+.album-card.is-locked .album-portrait{background:linear-gradient(145deg,#eff2f4,#e7ecef)}
+.album-card.is-locked .album-portrait svg{filter:brightness(0);opacity:.84}
+.album-card .album-mystery{position:absolute;right:9px;top:7px;padding:3px 7px;border-radius:20px;background:#ffffffd9;color:#576d78;font-size:12px;font-weight:950}
+.album-card strong{font-size:13px;line-height:1.5;display:block}
+.album-card .album-species{margin-top:3px;min-height:17px;font-size:12px;color:#4e7584;font-weight:800}
+.album-card.is-locked .album-species{color:#7b8c95;letter-spacing:.13em}
+.album-card .small{margin-top:5px;font-size:11px}
+@media(max-width:360px){.album-card .album-portrait{height:118px}.album-card .album-portrait svg{height:110px}.album-card{padding:8px}}
 #toast{position:absolute;bottom:90px;left:18px;right:18px;z-index:70;background:#264e5a;color:#fff;padding:13px 16px;border-radius:14px;box-shadow:var(--shadow);font-size:12px;font-weight:800;text-align:center;display:none;line-height:1.55}
 #toast.visible{display:block}
 footer{max-width:430px;text-align:center;color:#76969e;font-size:10px;line-height:1.6;margin:12px auto}
@@ -924,11 +933,11 @@ function cuteAnimalSVG(kind,level,game){
    ${eyes}${snouts[kind]}${mouth}${sweat}${patch}${bow}${stars}
   </g></svg>`;
 }
-function avatarSVG(game=false){
- const f=form(),level=Math.floor(fedTotal()/5)+1;
+function avatarSVG(game=false,previewForm=null){
+ const f=previewForm||form(),level=previewForm?1:Math.floor(fedTotal()/5)+1;
  const palette={base:['#fff5be','#f5d17d'],water:['#d4f5ff','#70cbf2'],ion:['#fff0b4','#f7bc56'],cool:['#caf8e7','#61cba9'],quiz:['#eddafa','#bb91e4']};
  const [c1,c2]=palette[f],advanced=f!=='base';
- const pet=petSpecies();if(pet)return cuteAnimalSVG(pet,level,game);
+ const pet=previewForm?null:petSpecies();if(pet)return cuteAnimalSVG(pet,level,game);
  const reacting=game&&simIndex>=1&&!simProtected;
  const severe=reacting&&simIndex===3;
  const tap=game?(tapIndex%3):0;
@@ -944,9 +953,9 @@ function avatarSVG(game=false){
  const item=f==='ion'?'<path d="M113 10L98 40H115L106 63L138 31H121L130 10Z" fill="#fff5a5" stroke="#b58b19" stroke-width="3"/>':f==='cool'?'<path d="M109 18L109 48 M94 33H124 M97 22L121 44 M121 22L97 44" stroke="#fff" stroke-width="5" stroke-linecap="round"/>':f==='water'?'<path d="M111 10C100 24 99 29 111 35C123 29 121 24 111 10" fill="#fff" stroke="#3990bd" stroke-width="2"/>':f==='quiz'?'<path d="M102 11L112 2L122 11L135 9L130 22L136 31L119 32L112 43L103 32L88 29L94 20L91 11Z" fill="#fff5a8" stroke="#946aa8" stroke-width="2"/>':'';
  return `<svg viewBox="0 0 220 190" role="img" aria-label="WBGT Buddy">
  <ellipse cx="110" cy="172" rx="59" ry="11" fill="#5a929f" opacity=".13"/>
- <defs><linearGradient id="bodyGradient" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+ <defs><linearGradient id="${previewForm?'albumBaseGradient':'bodyGradient'}" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
  <g transform="${severe?'translate(0 36) scale(1 .79)':''}">
- <path d="M62 87Q54 43 85 36Q105 15 133 32Q172 25 169 71Q185 107 161 143Q147 159 130 151Q110 160 92 151Q61 158 55 124Z" fill="url(#bodyGradient)" stroke="#77b2bd" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M62 87Q54 43 85 36Q105 15 133 32Q172 25 169 71Q185 107 161 143Q147 159 130 151Q110 160 92 151Q61 158 55 124Z" fill="url(#${previewForm?'albumBaseGradient':'bodyGradient'})" stroke="#77b2bd" stroke-width="3" stroke-linejoin="round"/>
  <path d="M67 135Q40 135 32 114" fill="none" stroke="#77b2bd" stroke-width="8" stroke-linecap="round"/>
  <path d="M158 132Q182 137 187 111" fill="none" stroke="#77b2bd" stroke-width="8" stroke-linecap="round"/>
  <ellipse cx="82" cy="104" rx="12" ry="6" fill="#f6aabb" opacity=".72"/>
@@ -1000,8 +1009,15 @@ function draw(){
  $('dropSummary').innerHTML=allTypes.map(type=>`<div class="drop ${type}" title="${t(type)}">${symbols[type]} ${state.stock[type]}</div>`).join('');
  $('reminder').checked=state.enabled;$('reminderLabel').textContent=state.enabled?t('notifyOn'):t('notifyOff');
  $('feedItems').innerHTML=allTypes.map(type=>`<div class="item-row"><div class="item-label"><span class="em">${symbols[type]}</span><div>${t(type)}<div class="small">× ${state.stock[type]}</div></div></div><button class="mini-btn" data-feed="${type}" ${state.stock[type]<1?'disabled':''}>+1</button></div>`).join('');
- const forms=[['base','🌱','menuBase'],['water','💦','menuWater'],['ion','⚡','menuIon'],['cool','❄️','menuCool'],['quiz','🧠','menuQuiz']];
- $('albumGrid').innerHTML=forms.map(([type,sym,name])=>{const unlocked=type==='base'||state.discovered.includes(type);return `<div class="album-card"><div class="aicon" style="filter:${unlocked?'none':'grayscale(1)'};opacity:${unlocked?'1':'.34'}">${sym}</div><strong>${t(name)}</strong><div class="small">${unlocked?t('unlocked'):t('locked')}</div></div>`}).join('');
+ // Use the actual animal artwork for each possible final evolution, not emoji placeholders.
+ // All existing unlock progress in state.discovered is preserved.
+ const forms=[['base','menuBase',null],['water','menuWater','dog'],['ion','menuIon','cat'],['cool','menuCool','rabbit'],['quiz','menuQuiz','squirrel']];
+ $('albumGrid').innerHTML=forms.map(([type,name,species])=>{
+  const unlocked=type==='base'||state.discovered.includes(type);
+  const portrait=species?cuteAnimalSVG(species,3,false):avatarSVG(false,'base');
+  const speciesName=species?(unlocked?((animalTranslations[lang]||animalTranslations.en)[species]):'???'):'';
+  return `<div class="album-card ${unlocked?'is-unlocked':'is-locked'}"><div class="album-portrait" aria-hidden="true">${portrait}${unlocked?'':'<span class="album-mystery">?</span>'}</div><strong>${t(name)}</strong>${species?'<div class="album-species">'+speciesName+'</div>':''}<div class="small">${unlocked?t('unlocked'):t('locked')}</div></div>`;
+ }).join('');
  renderQuiz();
 }
 
