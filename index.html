@@ -100,6 +100,10 @@ label.switch{display:flex;align-items:center;gap:7px;font-weight:800;font-size:1
 .map-filters{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
 .map-filter{background:#f0f8fa;border:1px solid #dcecf0;color:#426d7b;border-radius:999px;padding:8px 10px;font-size:10px;font-weight:900}
 .map-filter.active{background:#258fac;color:white;border-color:#258fac}
+.map-official-water{display:inline-flex;align-items:center;text-decoration:none;background:#e6f5ff;color:#166a94;border:1px solid #a7d9ed}
+.map-official-water:hover,.map-official-water:focus-visible{background:#d2eefa;text-decoration:underline}
+.map-water-note{background:#effaff;color:#2d6980;border:1px solid #d1e8f3;border-radius:10px;font-size:11px;line-height:1.7;padding:9px 11px;margin:8px 0 11px}
+
 .nearby-results{display:grid;gap:8px;margin-top:8px}
 .nearby-item{border:1px solid var(--border);border-radius:13px;padding:11px;background:#fff}
 .nearby-top{display:flex;align-items:flex-start;gap:8px}
@@ -650,12 +654,13 @@ body.staff-mode{overflow:hidden}
           <button class="map-filter" data-map-filter="nursing" data-i="filterNursing">授乳・おむつ替え</button>
           <button class="map-filter" data-map-filter="baby" data-i="filterBaby">子ども用品</button>
           <button class="map-filter" data-map-filter="cooling" data-i="filterCooling">クーリングスポット</button>
-          <button class="map-filter" data-map-filter="water" data-i="filterWater">給水スポット</button>
+          <a class="map-filter map-official-water" href="https://www.waterworks.metro.tokyo.lg.jp/kurashi/drinking_station/" target="_blank" rel="noopener noreferrer" data-i="filterWater">🚰 東京都公式給水所 ↗</a>
         </div>
+        <p class="map-water-note" data-i="mapWaterNote">🚰 給水所は東京都水道局の「Tokyowater Drinking Station」公式マップで確認できます（東京都内）。施設によっては入場料や利用時間の制限があります。</p>
         <div id="nearbyResults" class="nearby-results" aria-live="polite"><div class="map-empty" data-i="mapInitial">ボタンを押して位置情報の利用を許可すると、周辺施設を検索します。</div></div>
-        <div class="info" data-i="mapDataNotice">地図と施設情報はOpenStreetMapの登録情報を使用します。子連れ可否や授乳設備が確認できない場合もあるため、訪問前に施設へご確認ください。</div>
+        <div class="info" data-i="mapDataNotice">飲食店・授乳設備・クーリングスポットなどはOpenStreetMap情報です。給水所は東京都水道局の公式マップのみをご案内します。設備・利用条件は訪問前に確認してください。</div>
         <p class="small" data-i="mapPrivacy">位置情報は検索時に地図検索サービスへ送信されますが、このサイトには保存されません。位置情報の利用にはHTTPS接続と許可が必要です。</p>
-        <div class="contact-source">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a></div>
+        <div class="contact-source">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> · Drinking stations: <a href="https://www.waterworks.metro.tokyo.lg.jp/kurashi/drinking_station/" target="_blank" rel="noopener noreferrer">東京都水道局</a> (<a href="https://spec.api.metro.tokyo.lg.jp/spec/t000019d0000000003-b50a2d0e7366eaca67ef62aaa8c2b586-0" target="_blank" rel="noopener noreferrer">Tokyo Open Data / CC BY</a>)</div>
       </div>
     </section>
 
@@ -1276,6 +1281,8 @@ let stream=null,scanInterval=null,detector=null,reading=false;
 async function stopCamera(){if(scanInterval)clearInterval(scanInterval);scanInterval=null;if(stream){stream.getTracks().forEach(x=>x.stop());stream=null}$('cameraWrap').classList.add('hidden');reading=false}
 $('stopCamera').onclick=stopCamera;
 $('cameraButton').onclick=async()=>{if(!('BarcodeDetector' in window)||!navigator.mediaDevices?.getUserMedia){toast(t('cameraUnsupported'));return}try{detector=new BarcodeDetector({formats:['qr_code','ean_13','ean_8','code_128']});stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}});$('cameraVideo').srcObject=stream;$('cameraWrap').classList.remove('hidden');scanInterval=setInterval(async()=>{if(reading||!stream)return;reading=true;try{const results=await detector.detect($('cameraVideo'));if(results.length){redeem(results[0].rawValue);stopCamera()}}catch(e){}finally{reading=false}},550)}catch(e){stopCamera();toast(t('cameraError'))}};
+// Official Tokyo Water drinking station links; other map categories remain OpenStreetMap.
+Object.entries({"ja":{"filterWater":"🚰 東京都公式給水所 ↗","mapWaterNote":"🚰 給水所は東京都水道局の「Tokyowater Drinking Station」公式マップで確認できます（東京都内）。施設によっては入場料や利用時間の制限があります。","mapDataNotice":"飲食店・授乳設備・クーリングスポットなどはOpenStreetMap情報です。給水所は東京都水道局の公式マップのみをご案内します。設備・利用条件は訪問前に確認してください。"},"ko":{"filterWater":"🚰 도쿄 공식 급수대 ↗","mapWaterNote":"🚰 도쿄도의 급수대는 도쿄도 수도국의 공식 Tokyowater Drinking Station 지도에서 확인하세요. 도쿄 지역 한정이며, 일부 시설에는 입장료·이용 시간 제한이 있어요.","mapDataNotice":"음식점·수유실·냉방 쉼터 등은 OpenStreetMap 자료예요. 급수대는 도쿄도 수도국 공식 지도만 안내해요. 방문 전에 시설 이용 조건을 확인하세요."},"en":{"filterWater":"🚰 Official Tokyo water stations ↗","mapWaterNote":"🚰 For drinking water stations in Tokyo, use the Bureau of Waterworks' official Tokyowater Drinking Station map. Some locations require admission or have limited opening hours.","mapDataNotice":"Restaurants, nursing facilities and cooling spots use OpenStreetMap data. For drinking stations, we link only to the Tokyo Bureau of Waterworks' official map. Check access conditions before visiting."},"zh-CN":{"filterWater":"🚰 东京官方饮水站 ↗","mapWaterNote":"🚰 东京地区饮水站请查看东京都水道局的 Tokyowater Drinking Station 官方地图。部分设施有入场费或开放时间限制。","mapDataNotice":"餐厅、哺乳设施和避暑场所使用OpenStreetMap数据；饮水站仅链接东京都水道局官方地图。请事先确认使用条件。"},"zh-TW":{"filterWater":"🚰 東京官方飲水站 ↗","mapWaterNote":"🚰 東京地區飲水站請查看東京都水道局 Tokyowater Drinking Station 官方地圖。部分設施須付入場費或有開放時間限制。","mapDataNotice":"餐飲、哺乳設施及避暑場所採用OpenStreetMap資料；飲水站僅連結東京都水道局官方地圖。請先確認使用條件。"},"fr":{"filterWater":"🚰 Points d'eau officiels de Tokyo ↗","mapWaterNote":"🚰 À Tokyo, consultez la carte officielle Tokyowater Drinking Station du Bureau des eaux. Certains lieux exigent un billet d'entrée ou ont des horaires limités.","mapDataNotice":"Restaurants, équipements pour bébés et lieux frais proviennent d'OpenStreetMap. Pour les fontaines d'eau, seul le plan officiel du Bureau des eaux de Tokyo est proposé. Vérifiez l'accès avant de venir."},"es":{"filterWater":"🚰 Fuentes oficiales de Tokio ↗","mapWaterNote":"🚰 En Tokio, consulta el mapa oficial Tokyowater Drinking Station de la Oficina de Aguas. Algunos lugares requieren entrada o tienen horarios limitados.","mapDataNotice":"Restaurantes, instalaciones para bebés y lugares frescos se basan en OpenStreetMap. Para fuentes de agua enlazamos solo el mapa oficial de la Oficina de Aguas de Tokio. Confirma las condiciones de acceso."}}).forEach(([language,labels])=>Object.assign(dictionary[language],labels));
 // GPS-based nearby family facilities (OpenStreetMap + Overpass; no location stored)
 let nearbyMap=null, nearbyLayer=null, userMarker=null, nearbyItems=[], userLocation=null, currentMapFilter='all', mapHasSearched=false;
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -1295,7 +1302,6 @@ function categoriesFor(tags){
   if(['baby_feeding','feeding_place'].includes(tags.amenity)||tags.changing_table==='yes'||tags.baby_feeding==='yes')out.push('nursing');
   if(['baby_goods','toys'].includes(tags.shop))out.push('baby');
   if(['cooling_center','cooling_station','cooling_shelter'].includes(tags.amenity)||tags.cooling_center==='yes'||tags.cooling_station==='yes'||tags.cooling_shelter==='yes'||tags.cooling_place==='yes')out.push('cooling');
-  if(['drinking_water','water_point'].includes(tags.amenity)||tags.drinking_water==='yes'||tags.man_made==='water_tap')out.push('water');
   return [...new Set(out)];
 }
 function facilityEmoji(item){if(item.categories.includes('nursing'))return '🍼';if(item.categories.includes('baby'))return '🧸';if(item.categories.includes('cooling'))return '🧊';if(item.categories.includes('water'))return '🚰';return '🍽️';}
@@ -1325,7 +1331,7 @@ function renderNearby(){
 async function searchNearby(lat,lon){
   if(!initNearbyMap())return;
   const radius=Number($('radiusSelect').value)||2000;
-  const query=`[out:json][timeout:25];(nwr(around:${radius},${lat},${lon})["amenity"~"^(restaurant|cafe|fast_food|food_court)$"];nwr(around:${radius},${lat},${lon})["amenity"~"^(baby_feeding|feeding_place)$"];nwr(around:${radius},${lat},${lon})["changing_table"="yes"];nwr(around:${radius},${lat},${lon})["baby_feeding"="yes"];nwr(around:${radius},${lat},${lon})["shop"~"^(baby_goods|toys)$"];nwr(around:${radius},${lat},${lon})["amenity"~"^(drinking_water|water_point)$"];nwr(around:${radius},${lat},${lon})["drinking_water"="yes"];nwr(around:${radius},${lat},${lon})["man_made"="water_tap"];nwr(around:${radius},${lat},${lon})["amenity"~"^(cooling_center|cooling_station|cooling_shelter)$"];nwr(around:${radius},${lat},${lon})["cooling_center"="yes"];nwr(around:${radius},${lat},${lon})["cooling_station"="yes"];nwr(around:${radius},${lat},${lon})["cooling_shelter"="yes"];nwr(around:${radius},${lat},${lon})["cooling_place"="yes"];);out center tags;`;
+  const query=`[out:json][timeout:25];(nwr(around:${radius},${lat},${lon})["amenity"~"^(restaurant|cafe|fast_food|food_court)$"];nwr(around:${radius},${lat},${lon})["amenity"~"^(baby_feeding|feeding_place)$"];nwr(around:${radius},${lat},${lon})["changing_table"="yes"];nwr(around:${radius},${lat},${lon})["baby_feeding"="yes"];nwr(around:${radius},${lat},${lon})["shop"~"^(baby_goods|toys)$"];nwr(around:${radius},${lat},${lon})["amenity"~"^(cooling_center|cooling_station|cooling_shelter)$"];nwr(around:${radius},${lat},${lon})["cooling_center"="yes"];nwr(around:${radius},${lat},${lon})["cooling_station"="yes"];nwr(around:${radius},${lat},${lon})["cooling_shelter"="yes"];nwr(around:${radius},${lat},${lon})["cooling_place"="yes"];);out center tags;`;
   $('mapStatus').textContent=t('locating');$('locateMe').disabled=true;
   const endpoints=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
   let data=null;
